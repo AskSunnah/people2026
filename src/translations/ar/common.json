@@ -1,0 +1,20 @@
+{
+  "site": {
+    "name": "اسأل السنة",
+    "tagline": "منصة للمعرفة الإسلامية المبنية على القرآن والسنة"
+  },
+  "navigation": {
+    "mainLabel": "التنقل الرئيسي",
+    "toggleLabel": "فتح أو إغلاق القائمة",
+    "home": "الرئيسية",
+    "library": "المكتبة",
+    "about": "من نحن",
+    "feedback": "ملاحظات",
+    "contribute": "ساهم معنا",
+    "switchLanguage": "English"
+  },
+  "footer": {
+    "copyright": "© {year} اسأل السنة. جميع الحقوق محفوظة.",
+    "terms": "الشروط والأحكام"
+  }
+}
