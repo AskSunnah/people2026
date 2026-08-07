@@ -1,0 +1,20 @@
+{
+  "site": {
+    "name": "Ask Sunnah",
+    "tagline": "A platform for Islamic knowledge based on the Qur'an and Sunnah."
+  },
+  "navigation": {
+    "mainLabel": "Main Navigation",
+    "toggleLabel": "Toggle Navigation",
+    "home": "Home",
+    "library": "Library",
+    "about": "About Us",
+    "feedback": "Feedback",
+    "contribute": "Contribute",
+    "switchLanguage": "العربية"
+  },
+  "footer": {
+    "copyright": "Ask Sunnah {year}. All rights reserved.",
+    "terms": "Terms & Conditions"
+  }
+}
