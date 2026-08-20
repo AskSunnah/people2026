@@ -1,0 +1,43 @@
+{
+  "seoTitle": "AskSunnah – Islamic Questions & Answers",
+  "seoDescription": "Ask questions about Islam and explore authentic answers based on the Qur’an and Sunnah.",
+
+  "intro": {
+    "heading": "Ask about your Religion",
+    "description": "Send your question and receive an authentic, evidence-based answer drawn from the Qur’an and Sunnah, according to the understanding of the Salaf of this Ummah and the explanations of trusted scholars, answered by Dr. Sheikh Falah Kurkully",
+    "askButton": "Submit Your Question"
+  },
+  "recentAnswers": {
+    "sectionTitle": "Recent Answers",
+    "searchTitle": "Search Results",
+    "searchResultsFor": "Search results for:",
+    "totalAnswers": "Total Answers:",
+    "showAll": "Show all answers",
+    "searchPlaceholder": "Search Questions...",
+    "loading": "Loading questions...",
+    "searching": "Searching...",
+    "noResults": "No results found.",
+    "noAnswers": "No answers available yet.",
+    "error": "Failed to load questions.",
+    "searchError": "Search failed. Please try again."
+  },
+  "pinned": {
+    "defaultTitle": "Selected Questions",
+    "subtitle": "Trusted answers people are asking about most",
+    "readMore": "Read full answer"
+  },
+  "modal": {
+    "namePlaceholder": "Your Name",
+    "emailPlaceholder": "Your Email",
+    "questionPlaceholder": "Your Question",
+    "title": "Submit Your Question",
+    "submit": "Send Question",
+    "submitting": "Sending...",
+    "success": "Your question has been submitted. JazakAllah Khair!",
+    "error": "Something went wrong. Please try again.",
+    "connectionError": "Failed to submit. Please check your connection.",
+    "close": "Close",
+    "questionHint": "Please keep your question concise (max 800 characters). If you have more than one question, submit them separately.",
+    "thankYou": "Thank You!"
+  }
+}

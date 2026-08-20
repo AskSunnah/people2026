@@ -1,8 +1,19 @@
+// src/components/common/Navbar.jsx
 "use client";
 
 import { useEffect, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
+
+const LOCALE_INDEPENDENT_PATHS = ["/", "/library", "/about", "/feedback", "/contribute", "/terms"];
+const LOCALE_SPECIFIC_PREFIXES = ["/questions/"];
+
+function getLanguageSwitchHref(pathname) {
+  if (LOCALE_INDEPENDENT_PATHS.includes(pathname)) return pathname;
+  if (LOCALE_SPECIFIC_PREFIXES.some((prefix) => pathname.startsWith(prefix))) return "/";
+  // Unknown route shape — safest default is home rather than guessing.
+  return "/";
+}
 
 export default function Navbar() {
   const t = useTranslations("common.navigation");
@@ -17,49 +28,27 @@ export default function Navbar() {
   const isArabic = locale === "ar";
   const dir = isArabic ? "rtl" : "ltr";
   const otherLocale = isArabic ? "en" : "ar";
+  const switchHref = getLanguageSwitchHref(pathname);
 
   const navItems = [
-    {
-      href: "/",
-      label: t("home"),
-    },
-    {
-      href: "/library",
-      label: t("library"),
-    },
-    {
-      href: "/about",
-      label: t("about"),
-    },
-    {
-      href: "/feedback",
-      label: t("feedback"),
-    },
-    {
-      href: "/contribute",
-      label: t("contribute"),
-    },
+    { href: "/", label: t("home") },
+    { href: "/library", label: t("library") },
+    { href: "/about", label: t("about") },
+    { href: "/feedback", label: t("feedback") },
+    { href: "/contribute", label: t("contribute") },
   ];
 
   useEffect(() => {
     const handleScroll = () => {
       const currentY = window.scrollY;
-
       const goingDown = currentY > lastScrollY.current;
-
       const pastThreshold = currentY > 80;
 
-      if (goingDown && pastThreshold) {
-        setHidden(true);
-      } else {
-        setHidden(false);
-      }
-
+      setHidden(goingDown && pastThreshold);
       lastScrollY.current = currentY;
     };
 
     window.addEventListener("scroll", handleScroll, { passive: true });
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
@@ -73,7 +62,7 @@ export default function Navbar() {
     px-4 py-2 rounded-[4px] inline-block
     transition-all duration-200
     hover:[color:white]
-hover:[background:var(--button-hover)]
+    hover:[background:var(--button-hover)]
   `;
 
   return (
@@ -92,7 +81,6 @@ hover:[background:var(--button-hover)]
         ${hidden ? "-translate-y-full" : "translate-y-0"}
       `}
     >
-      {/* Hamburger — mobile only */}
       <button
         type="button"
         aria-label={t("toggleLabel")}
@@ -107,14 +95,7 @@ hover:[background:var(--button-hover)]
         ☰
       </button>
 
-      {/* Menu */}
-      <div
-        className={`
-          w-full
-          ${isOpen ? "block" : "hidden"}
-          md:block
-        `}
-      >
+      <div className={`w-full ${isOpen ? "block" : "hidden"} md:block`}>
         <ul
           className="
             list-none m-0 p-0
@@ -135,7 +116,7 @@ hover:[background:var(--button-hover)]
           ))}
 
           <li>
-            <Link href={pathname} locale={otherLocale} className={linkClass}>
+            <Link href={switchHref} locale={otherLocale} className={linkClass}>
               {t("switchLanguage")}
             </Link>
           </li>

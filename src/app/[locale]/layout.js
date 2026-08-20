@@ -1,12 +1,9 @@
+// src/app/[locale]/layout.js
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 
 import { getMessages, setRequestLocale } from "next-intl/server";
 
 import { notFound } from "next/navigation";
-
-import Header from "@/components/common/Header";
-import Navbar from "@/components/common/Navbar";
-import Footer from "@/components/common/Footer";
 
 import { routing } from "@/i18n/routing";
 
@@ -33,14 +30,7 @@ export default async function LocaleLayout({ children, params }) {
     <html lang={locale} dir={locale === "ar" ? "rtl" : "ltr"}>
       <body className="min-h-screen">
         <NextIntlClientProvider messages={messages}>
-          <div className="flex min-h-screen flex-col">
-            <Header />
-            <Navbar />
-
-            <main className="flex-1">{children}</main>
-
-            <Footer />
-          </div>
+          <div className="flex min-h-screen flex-col">{children}</div>
         </NextIntlClientProvider>
       </body>
     </html>

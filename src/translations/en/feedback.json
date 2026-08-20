@@ -1,0 +1,33 @@
+{
+  "headerTitle": "Feedback",
+  "pageTitle": "Feedback - Ask Sunnah",
+  "title": "We Value Your Feedback",
+  "subtitle": "Help us improve Ask Sunnah for everyone",
+  "nameLabel": "Your Name *",
+  "emailLabel": "Email Address *",
+  "phoneLabel": "Phone Number",
+  "phoneOptional": "(optional)",
+  "ratingQuestion": "1. How was your experience? *",
+  "ratingHint": "1 star = Very bad, 5 stars = Excellent",
+  "sectionQuestion": "2. What part of Ask Sunnah were you using? *",
+  "sectionsHint": "You can select more than one section.",
+  "feedbackQuestion": "3. What went wrong or what should we improve? *",
+  "feedbackHint": "Tell us briefly about your experience",
+  "submit": "Submit Feedback",
+  "sending": "Sending…",
+  "successTitle": "Jazakallah Khairan!",
+  "successText": "Your feedback has been submitted successfully.",
+  "requiredAlert": "Please fill in all required fields",
+  "errorGeneric": "Something went wrong sending your feedback. Please try again.",
+  "errorNetwork": "Network error. Please check your connection and try again.",
+  "placeholderName": "Enter your name",
+  "placeholderEmail": "your.email@example.com",
+  "placeholderPhone": "+1 (555) 000-0000",
+  "placeholderFeedback": "Share your thoughts, suggestions, or issues you encountered...",
+  "sections": [
+    { "value": "Q&A", "label": "Q&A" },
+    { "value": "Books", "label": "Books" },
+    { "value": "Search / Library", "label": "Search / Library" },
+    { "value": "Other", "label": "Other" }
+  ]
+}

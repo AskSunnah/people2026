@@ -1,0 +1,33 @@
+{
+  "headerTitle": "نقدر رأيك",
+  "pageTitle": "الملاحظات - أسأل سنة",
+  "title": "نقدر رأيك في أسأل سنة",
+  "subtitle": "ساعدنا على تحسين المنصة لجميع المستخدمين",
+  "nameLabel": "الاسم الكريم *",
+  "emailLabel": "البريد الإلكتروني *",
+  "phoneLabel": "رقم الجوال",
+  "phoneOptional": "(اختياري)",
+  "ratingQuestion": "١. كيف تُقيِّم تجربتك مع أسأل سنة؟ *",
+  "ratingHint": "١ نجمة = سيئة جدًا ، ٥ نجوم = ممتازة",
+  "sectionQuestion": "٢. أي جزء من أسأل سنة كنتَ تستخدم؟ *",
+  "sectionsHint": "يمكنك اختيار أكثر من قسم.",
+  "feedbackQuestion": "٣. ما المشكلة التي واجهتها أو ماذا تقترح لتحسين المنصة؟ *",
+  "feedbackHint": "اكتب لنا بإيجاز رأيك أو ملاحظاتك أو أي صعوبات واجهتها",
+  "submit": "إرسال الملاحظة",
+  "sending": "جاري الإرسال…",
+  "successTitle": "جزاك الله خيرا!",
+  "successText": "تم إرسال ملاحظتك بنجاح.",
+  "requiredAlert": "يرجى تعبئة جميع الحقول المطلوبة",
+  "errorGeneric": "حدث خطأ أثناء إرسال الملاحظة. يرجى المحاولة مرة أخرى.",
+  "errorNetwork": "خطأ في الاتصال. يرجى المحاولة مرة أخرى.",
+  "placeholderName": "اكتب اسمك هنا",
+  "placeholderEmail": "your.email@example.com",
+  "placeholderPhone": "+966 5x xxx xxxx",
+  "placeholderFeedback": "اكتب ملاحظاتك أو اقتراحاتك هنا...",
+  "sections": [
+    { "value": "Q&A", "label": "قسم الأسئلة والأجوبة" },
+    { "value": "Books", "label": "قسم الكتب" },
+    { "value": "Search / Library", "label": "البحث / المكتبة" },
+    { "value": "Other", "label": "أخرى" }
+  ]
+}

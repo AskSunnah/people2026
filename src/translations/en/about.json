@@ -1,0 +1,39 @@
+{
+  
+    "headerTitle": "About Us",
+    "pageTitle": "About Us - Ask Sunnah",
+  "headerSubtitle": "Authentic answers from Dr. Sheikh Falah Kurkully — grounded in Qur'an, Sunnah & the Salaf.",
+  "vision": {
+    "title": "Vision",
+    "text": "To build a comprehensive, easy-to-navigate encyclopaedia of Islamic knowledge—rooted in the Qur'an, the Prophet's Sunnah, and the methodology of the righteous predecessors (Salaf)."
+  },
+  "mission": {
+    "title": "Mission",
+    "text": "Ask Sunnah is an educational & da'wah platform offering clear, academic answers supervised by Dr. Sheikh Falah Kurkully (PhD in Hadith Sciences)."
+  },
+  "aims": {
+    "title": "Aims",
+    "points": [
+      "Spread the message of Islam and call people to its beauty.",
+      "Dispense authentic knowledge and dispel ignorance.",
+      "Answer contemporary needs with evidence from sacred texts.",
+      "Refute misleading arguments against Islam.",
+      "Offer practical advice on daily issues through scholarly guidance."
+    ]
+  },
+  "methodology": {
+    "title": "Methodology",
+    "text": "We adhere to the beliefs of Ahl as-Sunnah wa'l-Jamaa'ah and follow the scholars of the Salaf as-Saaliheen.",
+    "points": [
+      "Is based on the Holy Qur'an and authentically-narrated Sunnah (Saheeh).",
+      "Reflects the views of the four Imams: Abu Haneefah, Maalik, ash-Shaafa'i, and Ahmad.",
+      "Is cross-checked with contemporary fiqh councils and leading Hadith research.",
+      "Avoids fruitless debates, focusing instead on beneficial, evidence-based guidance."
+    ]
+  },
+  "bio": {
+    "title": "About Dr. Sheikh Falah Kurkully",
+    "text": "Dr. Sheikh Falah Karkoli is a distinguished Islamic scholar who holds a PhD in Hadith Sciences. He studied under renowned scholars such as Sheikh Ibn Uthaymeen, Sheikh Saleh Al-Fawzan, Sheikh Abdul-Muhsin Al-Abbad, Sheikh Muqbil bin Hadi Al-Wadi'i, and Sheikh Abu Bakr Al-Jaza'iri. With decades of experience in teaching and Islamic outreach (da'wah), he provides answers on AskSunnah that are rooted in knowledge, precision, and scholarly integrity."
+  },
+  "dua": "O Allah, make us steadfast on the path of guidance, help us adhere to what pleases You, and accept our humble efforts, Ameen."
+}
