@@ -1,0 +1,15 @@
+{
+  "question": "Question:",
+  "answer": "Answer:",
+  "conclusion": "Summary:",
+  "back": "← Back to Questions",
+  "andAllahKnowsBest": "And Allah knows best.",
+  "fromQuran": "From the Qur'an:",
+  "fromSunnah": "From the Sunnah:",
+  "fromSalaf": "From the Salaf:",
+  "fromScholars": "From the Scholars:",
+  "searchPlaceholder": "Search More Questions...",
+  "shareText": "Read this answer",
+  "linkCopied": "Link copied",
+  "relatedAnswers": "Related Answers"
+}

@@ -1,0 +1,32 @@
+{
+  "headerTitle": "Contribute to AskSunnah",
+  "heading": "Contribute to AskSunnah",
+  "motivation": "Your support enables us to maintain and grow this platform of authentic Islamic knowledge.",
+  "choosePayment": "Choose a Payment Method",
+  "oneTime": "One-Time",
+  "monthly": "Monthly",
+  "card": "Continue to Card Checkout",
+  "processing": "Processing…",
+  "donating": "You are donating:",
+  "otherAmount": "Other",
+  "emailPlaceholder": "Enter your email",
+  "emailRequired": "Please enter your email before proceeding.",
+  "genericError": "Something went wrong. Please try again.",
+  "maintenance": "Under Maintenance, please come back",
+  "success": {
+    "title": "Thank you!",
+    "message": "Your donation has been successfully processed.",
+    "backLink": "Go back to AskSunnah"
+  },
+  "cancel": {
+    "title": "Donation Cancelled",
+    "message": "You have cancelled the payment. If this was a mistake, please try again.",
+    "backLink": "Go back to Contribute"
+  },
+  "manage": {
+    "title": "Manage Your Subscription",
+    "button": "Go to Billing Portal",
+    "loading": "Redirecting…",
+    "error": "We couldn't load your subscription. Please try again from your confirmation email."
+  }
+}

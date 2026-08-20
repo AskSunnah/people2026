@@ -1,0 +1,15 @@
+{
+  "question": "السؤال:",
+  "answer": "الجواب:",
+  "conclusion": "ملخص الجواب:",
+  "back": "← العودة إلى الأسئلة",
+  "andAllahKnowsBest": "والله أعلم.",
+  "fromQuran": "من القرآن الكريم:",
+  "fromSunnah": "من السنة النبوية:",
+  "fromSalaf": "من السلف الصالح:",
+  "fromScholars": "من أقوال العلماء:",
+  "searchPlaceholder": "تصفح المزيد من الأسئلة ...",
+  "shareText": "اقرأ هذه الفتوى",
+  "linkCopied": "تم نسخ الرابط",
+  "relatedAnswers": "فتاوى ذات صلة"
+}
