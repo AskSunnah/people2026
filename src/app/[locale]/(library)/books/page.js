@@ -2,7 +2,7 @@ import { getTranslations } from "next-intl/server";
 
 import { getBooks, getAuthors } from "@/services/library.service";
 
-import BookLibraryClient from "@/components/library/books/BookLibraryClient";
+import BookLibraryClient from "@/components/Library/BookLibraryClient";
 
 const LIMIT = 9;
 

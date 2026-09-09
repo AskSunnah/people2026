@@ -6,7 +6,7 @@ import { setRequestLocale, getTranslations } from "next-intl/server";
 import { getQuestionBySlug } from "@/services/question.service";
 import { getPinnedSections } from "@/services/pinned.service";
 
-import { ReportableContent } from "@/components/Question/ReportableContent";
+import { ReportableContent } from "@/components/common/ReportableContent";
 import QuestionContent from "@/components/Question/QuestionContent";
 import QuestionSearchBar from "@/components/Question/QuestionSearchBar";
 import PinnedSidebar from "@/components/Question/PinnedSidebar";
