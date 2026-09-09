@@ -11,7 +11,9 @@
     "hoverHint": "Hover to read"
   },
   "books": {
-    "headerTitle": "Books",
+    "headerTitle": "English Books",
+    "seoTitle": "Islamic Books | AskSunnah Library",
+    "seoDescription": "Browse Islamic books in English on Aqeedah, Hadith, Fiqh, Seerah and other Islamic topics in the AskSunnah Library.",
     "englishBooks": "English Books",
     "arabicBooks": "Arabic Books",
     "read": "Read",
