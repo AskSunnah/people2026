@@ -416,18 +416,19 @@ export default function BookLibraryClient({
         alert(
           lang === "ar"
             ? "لا يتوفر رابط تحميل لهذا الكتاب."
-            : "No download link available for this book.",
+            : "No download link is available for this book.",
         );
-
         return;
       }
 
       window.location.href = downloadUrl;
-    } catch {
+    } catch (error) {
+      console.error("Download error:", error);
+
       alert(
         lang === "ar"
-          ? "حدث خطأ أثناء التحميل."
-          : "Something went wrong while downloading.",
+          ? "لا يتوفر رابط تحميل لهذا الكتاب."
+          : "No download link is available for this book.",
       );
     }
   };
