@@ -5,12 +5,21 @@ import { useEffect, useRef, useState } from "react";
 import { useLocale, useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 
-const LOCALE_INDEPENDENT_PATHS = ["/", "/library", "/about", "/feedback", "/contribute", "/terms"];
+const LOCALE_INDEPENDENT_PATHS = [
+  "/",
+  "/library",
+  "/books",
+  "/about",
+  "/feedback",
+  "/contribute",
+  "/terms",
+];
 const LOCALE_SPECIFIC_PREFIXES = ["/questions/"];
 
 function getLanguageSwitchHref(pathname) {
   if (LOCALE_INDEPENDENT_PATHS.includes(pathname)) return pathname;
-  if (LOCALE_SPECIFIC_PREFIXES.some((prefix) => pathname.startsWith(prefix))) return "/";
+  if (LOCALE_SPECIFIC_PREFIXES.some((prefix) => pathname.startsWith(prefix)))
+    return "/";
   // Unknown route shape — safest default is home rather than guessing.
   return "/";
 }
