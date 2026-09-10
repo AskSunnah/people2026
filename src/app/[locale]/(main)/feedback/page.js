@@ -1,13 +1,17 @@
 // src/app/[locale]/(main)/feedback/page.js
 import { getTranslations } from "next-intl/server";
 import FeedbackForm from "@/components/Feedback/FeedbackForm";
-
-export async function generateMetadata() {
-  const t = await getTranslations("feedback");
-  return {
-    title: t("pageTitle"),
-    description: t("subtitle"),
-  };
+import { buildMetadata } from "@/lib/seo";
+// src/app/[locale]/(main)/feedback/page.js
+export async function generateMetadata({ params }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "feedback" });
+  return buildMetadata({
+    locale,
+    path: "/feedback",
+    title: t("seo.title"),
+    description: t("seo.description"),
+  });
 }
 
 export default function FeedbackPage() {

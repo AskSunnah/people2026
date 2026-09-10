@@ -1,7 +1,7 @@
 // src/app/[locale]/(main)/page.js
 
 import { getTranslations, setRequestLocale } from "next-intl/server";
-
+import { buildMetadata } from "@/lib/seo";
 import { getRecentAnswers } from "@/services/question.service";
 import { getPinnedSections } from "@/services/pinned.service";
 
@@ -11,27 +11,13 @@ import RecentAnswers from "@/components/Home/RecentAnswers";
 
 export async function generateMetadata({ params }) {
   const { locale } = await params;
-
-  const t = await getTranslations({
+  const t = await getTranslations({ locale, namespace: "home" });
+  return buildMetadata({
     locale,
-    namespace: "home",
+    path: "/",
+    title: t("seo.title"),
+    description: t("seo.description"),
   });
-
-  const title = t("seoTitle");
-  const description = t("seoDescription");
-
-  return {
-    title,
-    description,
-
-    openGraph: {
-      title,
-      description,
-      type: "website",
-      siteName: "AskSunnah",
-      locale: locale === "ar" ? "ar" : "en_US",
-    },
-  };
 }
 
 export default async function HomePage({ params }) {
@@ -75,7 +61,11 @@ export default async function HomePage({ params }) {
 
       <AskQuestionSection direction={direction} locale={locale} />
 
-      <RecentAnswers initialAnswers={answers} direction={direction} locale={locale} />
+      <RecentAnswers
+        initialAnswers={answers}
+        direction={direction}
+        locale={locale}
+      />
     </div>
   );
 }
