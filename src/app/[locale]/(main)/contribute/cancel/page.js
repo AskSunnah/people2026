@@ -12,8 +12,7 @@ export default async function ContributeCancelPage() {
 
   return (
     <DonationStatusCard
-      icon="✕"
-      iconColorClass="text-red-500"
+      variant="cancel"
       title={t("title")}
       message={t("message")}
       linkLabel={t("backLink")}

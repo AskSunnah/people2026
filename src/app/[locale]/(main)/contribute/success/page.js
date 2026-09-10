@@ -12,8 +12,7 @@ export default async function ContributeSuccessPage() {
 
   return (
     <DonationStatusCard
-      icon="✓"
-      iconColorClass="text-green-600"
+      variant="success"
       title={t("title")}
       message={t("message")}
       linkLabel={t("backLink")}

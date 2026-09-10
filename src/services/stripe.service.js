@@ -8,7 +8,7 @@ export async function createCheckoutSession(data) {
     
     body: JSON.stringify({
       ...data,
-      origin: window.location.origin, // e.g. https://asksunnah.com
+      origin: window.location.origin,
     }),
   });
 
