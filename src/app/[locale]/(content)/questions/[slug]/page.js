@@ -1,7 +1,7 @@
-
 // src/app/[locale]/(content)/questions/[slug]/page.js
 import { notFound } from "next/navigation";
 import { setRequestLocale, getTranslations } from "next-intl/server";
+import { buildAlternates } from "@/lib/seo";
 
 import { getQuestionBySlug } from "@/services/question.service";
 import { getPinnedSections } from "@/services/pinned.service";
@@ -11,24 +11,24 @@ import QuestionContent from "@/components/Question/QuestionContent";
 import QuestionSearchBar from "@/components/Question/QuestionSearchBar";
 import PinnedSidebar from "@/components/Question/PinnedSidebar";
 import RelatedAnswersSidebar from "@/components/Question/RelatedAnswersSidebar";
+import { buildMetadata } from "@/lib/seo";
 
 export async function generateMetadata({ params }) {
   const { locale, slug } = await params;
   const data = await getQuestionBySlug(slug, locale);
-
   if (!data) return {};
 
-  const description = (data.conclusion || data.answer || "").slice(0, 160);
+  const description = (data.conclusion || data.answer || "")
+    .replace(/\s+/g, " ").trim().slice(0, 160);
 
-  return {
+  return buildMetadata({
+    locale,
+    path: `/questions/${slug}`,
     title: data.heading,
     description,
-    openGraph: {
-      title: data.heading,
-      description,
-      locale,
-    },
-  };
+    image: data.ogImage, // undefined → falls back to DEFAULT_OG_IMAGE automatically
+    type: "article",
+  });
 }
 
 export default async function QuestionDetailPage({ params, searchParams }) {
@@ -47,13 +47,17 @@ export default async function QuestionDetailPage({ params, searchParams }) {
 
   const [relatedResult, pinnedResult] = await Promise.allSettled([
     Promise.all(
-      (data.relatedQuestions || []).map((rq) => getQuestionBySlug(rq.slug, rq.lang)),
+      (data.relatedQuestions || []).map((rq) =>
+        getQuestionBySlug(rq.slug, rq.lang),
+      ),
     ),
     getPinnedSections(locale),
   ]);
 
   const relatedData =
-    relatedResult.status === "fulfilled" ? relatedResult.value.filter(Boolean) : [];
+    relatedResult.status === "fulfilled"
+      ? relatedResult.value.filter(Boolean)
+      : [];
 
   const pinnedSections =
     pinnedResult.status === "fulfilled" && pinnedResult.value?.active
@@ -64,12 +68,17 @@ export default async function QuestionDetailPage({ params, searchParams }) {
   const hasPinned = pinnedSections.length > 0;
 
   const backPage = sp?.page;
-  const backHref = backPage ? { pathname: "/", query: { page: backPage } } : "/";
+  const backHref = backPage
+    ? { pathname: "/", query: { page: backPage } }
+    : "/";
 
   return (
     <>
       <div className="sticky top-0 z-20 bg-[var(--bg-main)] max-w-[1320px] mx-auto px-4 pt-4 pb-3 max-[768px]:px-3">
-        <QuestionSearchBar direction={direction} placeholder={t("searchPlaceholder")} />
+        <QuestionSearchBar
+          direction={direction}
+          placeholder={t("searchPlaceholder")}
+        />
       </div>
 
       <div
@@ -98,7 +107,9 @@ export default async function QuestionDetailPage({ params, searchParams }) {
 
         {(hasPinned || hasRelated) && (
           <div className="w-full lg:w-[300px] shrink-0 mb-10 lg:mb-0 lg:pt-2 space-y-6">
-            {hasPinned && <PinnedSidebar sections={pinnedSections} direction={direction} />}
+            {hasPinned && (
+              <PinnedSidebar sections={pinnedSections} direction={direction} />
+            )}
             {hasRelated && (
               <RelatedAnswersSidebar
                 relatedData={relatedData}

@@ -1,10 +1,18 @@
 // src/app/[locale]/(main)/contribute/page.js
 import { getTranslations } from "next-intl/server";
 import Contribute from "@/components/Contribute/Contribute";
+import { buildMetadata } from "@/lib/seo";
 
-export async function generateMetadata() {
-  const t = await getTranslations("contribute");
-  return { title: t("headerTitle") };
+// src/app/[locale]/(main)/contribute/page.js
+export async function generateMetadata({ params }) {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: "contribute" });
+  return buildMetadata({
+    locale,
+    path: "/contribute",
+    title: t("seo.title"),
+    description: t("seo.description"),
+  });
 }
 
 export default function ContributePage() {

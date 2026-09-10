@@ -1,7 +1,11 @@
 {
-  
-    "headerTitle": "About Us",
-    "pageTitle": "About Us - Ask Sunnah",
+
+  "seo": {
+    "title": "About Us",
+    "description": "Authentic answers from Dr. Sheikh Falah Kurkully — grounded in Qur'an, Sunnah & the Salaf."
+  },
+   "headerTitle": "About Us",
+  "pageTitle": "About Us",
   "headerSubtitle": "Authentic answers from Dr. Sheikh Falah Kurkully — grounded in Qur'an, Sunnah & the Salaf.",
   "vision": {
     "title": "Vision",

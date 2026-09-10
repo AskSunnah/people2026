@@ -1,6 +1,9 @@
 {
-  "seoTitle": "AskSunnah – Islamic Questions & Answers",
-  "seoDescription": "Ask questions about Islam and explore authentic answers based on the Qur’an and Sunnah.",
+
+  "seo": {
+    "title": "AskSunnah – Islamic Questions & Answers",
+    "description": "Ask questions about Islam and explore authentic answers based on the Qur’an and Sunnah."
+  },
 
   "intro": {
     "heading": "Ask about your Religion",

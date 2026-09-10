@@ -1,6 +1,11 @@
 {
+
+  "seo": {
+    "title": "Feedback",
+    "description": "Help us improve AskSunnah — share your experience and suggestions."
+  },
   "headerTitle": "Feedback",
-  "pageTitle": "Feedback - Ask Sunnah",
+  "pageTitle": "Feedback",
   "title": "We Value Your Feedback",
   "subtitle": "Help us improve Ask Sunnah for everyone",
   "nameLabel": "Your Name *",
