@@ -429,8 +429,6 @@ export default function BookReaderClient({ book, lang, slug }) {
           {book.title}
         </h1>
       </header>
-
-      {/* Original Reader navbar */}
       <nav className="bg-[var(--bg-main)] px-6 py-3 z-10 shrink-0 border-b border-[var(--border-color)] font-['Segoe_UI',Tahoma,Geneva,Verdana,sans-serif]">
         <ul className="list-none m-0 p-0 flex flex-wrap justify-center gap-6">
           <li>
