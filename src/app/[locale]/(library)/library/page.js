@@ -1,4 +1,5 @@
 import { getTranslations } from "next-intl/server";
+
 import LibraryLanding from "@/components/library/LibraryLanding";
 
 export async function generateMetadata({ params }) {
