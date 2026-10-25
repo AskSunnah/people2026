@@ -101,8 +101,16 @@ export async function getBook(lang, slug, options = {}) {
     };
   }
 
+  let normalizedSlug = slug;
+
+  try {
+    normalizedSlug = decodeURIComponent(slug);
+  } catch {
+    normalizedSlug = slug;
+  }
+
   const res = await fetch(
-    `${ensureApiBase()}/api/books/${endpoint}/${encodeURIComponent(slug)}`,
+    `${ensureApiBase()}/api/books/${endpoint}/${encodeURIComponent(normalizedSlug)}`,
     fetchOptions,
   );
 
