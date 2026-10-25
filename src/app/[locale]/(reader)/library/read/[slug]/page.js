@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
 
 import { getBook } from "@/services/library.service";
-import BookReaderClient from "@/components/library/reader/BookReaderClient";
+
+import BookReaderClient from "@/components/Library/reader/BookReaderClient";
 
 function createDescription(book, lang) {
   const source = book?.aboutBook?.trim() || book?.description?.trim() || "";

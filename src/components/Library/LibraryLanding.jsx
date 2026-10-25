@@ -1,7 +1,7 @@
 import { getLocale } from "next-intl/server";
 
-import HoverHadith from "@/components/library/HoverHadith";
-import LibraryButtons from "@/components/library/LibraryButtons";
+import HoverHadith from "@/components/Library/HoverHadith";
+import LibraryButtons from "@/components/Library/LibraryButtons";
 
 export default async function LibraryLanding() {
   const locale = await getLocale();
