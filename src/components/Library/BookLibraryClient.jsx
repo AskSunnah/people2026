@@ -20,6 +20,7 @@ export default function BookLibraryClient({
   lang = "en",
   initialBooks = [],
   initialHasMore = false,
+  initialTotal = 0,
   initialAuthors = [],
 }) {
   const t = useTranslations("library");
@@ -73,6 +74,8 @@ export default function BookLibraryClient({
   const [page, setPage] = useState(1);
 
   const [hasMore, setHasMore] = useState(initialHasMore);
+
+  const [totalBooks, setTotalBooks] = useState(initialTotal);
 
   const firstFetch = useRef(true);
 
@@ -289,6 +292,7 @@ export default function BookLibraryClient({
         );
 
         setHasMore(Boolean(data?.hasMore));
+        setTotalBooks(data?.total || 0);
 
         if (
           page === 1 &&
@@ -482,7 +486,12 @@ export default function BookLibraryClient({
           resetFilters={resetFilters}
           handleSuggestionSelect={handleSuggestionSelect}
         />
-
+        <div className="mb-4 inline-flex items-center gap-2 rounded-full bg-white/90 px-3 py-1 text-sm font-medium text-stone-800 shadow-sm">
+          <span className="h-2 w-2 rounded-full bg-[#c9a227]" />
+          {lang === "ar"
+            ? `الكتب: ${totalBooks}`
+            : `${totalBooks} ${totalBooks === 1 ? "Book" : "Books"}`}
+        </div>
         <BookGrid
           lang={lang}
           t={t}

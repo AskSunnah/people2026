@@ -32,11 +32,8 @@ export async function generateMetadata({ params }) {
     openGraph: {
       title: t("seoTitle"),
       description: t("seoDescription"),
-
       type: "website",
-
       url: `/${lang}/books`,
-
       locale: lang === "ar" ? "ar" : "en",
     },
   };
@@ -74,6 +71,7 @@ export default async function BooksPage({ params }) {
         lang={lang}
         initialBooks={booksData?.books || []}
         initialHasMore={Boolean(booksData?.hasMore)}
+        initialTotal={booksData?.total || 0}
         initialAuthors={authors || []}
       />
     </>
