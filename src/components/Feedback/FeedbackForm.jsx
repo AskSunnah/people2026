@@ -90,16 +90,16 @@ export default function FeedbackForm() {
   };
 
   return (
-    <div
-      dir={dir}
-      className="
-        min-h-screen
-        bg-white
-        px-4 sm:px-6 lg:px-8
-        py-8 sm:py-12
-        font-sans
-      "
-    >
+   <div
+  dir={dir}
+  className={`
+    min-h-screen
+    bg-white
+    px-4 sm:px-6 lg:px-8
+    py-8 sm:py-12
+    ${isArabic ? "font-arabic leading-relaxed" : "font-sans"}
+  `}
+>
       <div
         className="
           w-full

@@ -84,7 +84,7 @@ export default function Navbar() {
         py-6 px-4 md:py-4 md:px-0
         shadow-[0_2px_6px_rgba(0,0,0,0.05)]
         border-b border-[#f0f0f0]
-        font-[var(--font-family)]
+        ${isArabic ? "font-[var(--font-noto-arabic)]" : "font-[var(--font-family)]"}
         text-[var(--text-main)]
         transition-transform duration-300 ease-in-out
         ${hidden ? "-translate-y-full" : "translate-y-0"}

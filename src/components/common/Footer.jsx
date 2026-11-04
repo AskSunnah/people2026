@@ -57,20 +57,22 @@ const socialLinks = [
 
 export default async function Footer() {
   const locale = await getLocale();
+  const isRTL = locale === "ar";
   const t = await getTranslations("common");
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer
-      dir={locale === "ar" ? "rtl" : "ltr"}
-      className="
-        relative overflow-hidden
-        bg-[linear-gradient(180deg,#e1cb57_0%,#d0b640_30%,#c3a421_65%,#a67f0f_100%)]
-        px-4 pb-4 pt-6
-        text-center text-white
-        sm:px-6
-      "
-    >
+   <footer
+  dir={isRTL ? "rtl" : "ltr"}
+  className={`
+    relative overflow-hidden
+    bg-[linear-gradient(180deg,#e1cb57_0%,#d0b640_30%,#c3a421_65%,#a67f0f_100%)]
+    px-4 pb-4 pt-6
+    text-center text-white
+    sm:px-6
+    ${isRTL ? "font-arabic" : ""}
+  `}
+>
       <div className="absolute inset-x-0 top-0 h-[15px] bg-gradient-to-b from-white/20 to-transparent" />
 
       <div className="relative flex flex-col items-center gap-3 text-center">

@@ -88,3 +88,7 @@ body {
   background: var(--button-gradient);
   color: var(--button-text-color);
 }
+
+.font-arabic {
+  font-family: var(--font-noto-arabic), sans-serif;
+}
