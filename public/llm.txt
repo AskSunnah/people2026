@@ -1,0 +1,27 @@
+# Ask Sunnah
+
+Ask Sunnah is an Islamic Q&A and digital library website providing English and Arabic content.
+
+## Main sections
+
+- Home: https://asksunnah.com/en
+- Arabic Home: https://asksunnah.com/ar
+- English Questions: https://asksunnah.com/en
+- Arabic Questions: https://asksunnah.com/ar
+- English Library: https://asksunnah.com/en/library
+- Arabic Library: https://asksunnah.com/ar/library
+- English Books: https://asksunnah.com/en/books
+- Arabic Books: https://asksunnah.com/ar/books
+
+## Sitemap
+
+https://asksunnah.com/sitemap.xml
+
+## About
+
+https://asksunnah.com/en/about
+
+## Notes
+
+Content is available in English and Arabic.
+Question pages and book pages contain the primary public content of the site.
