@@ -4,7 +4,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { buildMetadata } from "@/lib/seo";
 import { getRecentAnswers } from "@/services/question.service";
 import { getPinnedSections } from "@/services/pinned.service";
-
+import { SITE_URL } from "@/lib/seo";
 import PinnedSection from "@/components/Home/PinnedSection";
 import AskQuestionSection from "@/components/Home/AskQuestionSection";
 import RecentAnswers from "@/components/Home/RecentAnswers";
@@ -44,7 +44,43 @@ export default async function HomePage({ params }) {
       ? pinned.value.sections || []
       : [];
 
+      const homeSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": `${SITE_URL}/${locale}/#webpage`,
+  url: `${SITE_URL}/${locale}`,
+  name: "AskSunnah",
+  description:
+    locale === "ar"
+      ? "اسأل وتصفح الإجابات الإسلامية في مكتبة أسك سنة."
+      : "Explore Islamic questions and answers on AskSunnah.",
+  inLanguage: locale,
+  isPartOf: {
+    "@id": `${SITE_URL}/#website`,
+  },
+  mainEntity: {
+    "@type": "ItemList",
+    "@id": `${SITE_URL}/${locale}/#recent-answers`,
+    name: locale === "ar" ? "أحدث الإجابات" : "Recent Answers",
+    itemListOrder: "https://schema.org/ItemListOrderDescending",
+    numberOfItems: answers.length,
+    itemListElement: answers.slice(0, 5).map((item, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      url: `${SITE_URL}/${locale}/questions/${item.slug}`,
+      name: item.heading,
+    })),
+  },
+};
+
   return (
+    <>
+    <script
+  type="application/ld+json"
+  dangerouslySetInnerHTML={{
+    __html: JSON.stringify(homeSchema).replace(/</g, "\\u003c"),
+  }}
+/>
     <div
       className="
         max-w-[900px] mx-auto my-8 px-6 py-6
@@ -67,5 +103,6 @@ export default async function HomePage({ params }) {
         locale={locale}
       />
     </div>
+    </>
   );
 }

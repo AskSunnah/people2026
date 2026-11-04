@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation";
 import { getTranslations } from "next-intl/server";
-
+import { SITE_URL } from "@/lib/seo";
 import { getBook } from "@/services/library.service";
 import BookDetailsClient from "@/components/Library/details/BookDetailsClient";
 
@@ -88,64 +88,62 @@ export default async function BookDetailsPage({ params }) {
       0,
     ) || 0;
 
-  const bookSchema = {
-    "@context": "https://schema.org",
-    "@type": "Book",
+const bookUrl = `${SITE_URL}/${lang}/books/${slug}`;
 
-    name: book.title,
+const bookSchema = {
+  "@context": "https://schema.org",
+  "@type": "Book",
+  "@id": `${bookUrl}#book`,
+  name: book.title,
 
-    ...(book.author && {
-      author: {
-        "@type": "Person",
-        name: book.author,
-      },
-    }),
+  ...(book.author && {
+    author: {
+      "@type": "Person",
+      name: book.author,
+    },
+  }),
 
-    description,
+  description,
+  inLanguage: book.language || lang,
 
-    inLanguage: book.language || lang,
+  ...(totalPages > 0 && {
+    numberOfPages: totalPages,
+  }),
 
-    ...(totalPages > 0 && {
-      numberOfPages: totalPages,
-    }),
+  url: bookUrl,
+};
 
-    url: `/${lang}/books/${slug}`,
-  };
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
 
-  const breadcrumbSchema = {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-
-    itemListElement: [
-      {
-        "@type": "ListItem",
-        position: 1,
-        name: lang === "ar" ? "الرئيسية" : "Home",
-        item: `/${lang}`,
-      },
-
-      {
-        "@type": "ListItem",
-        position: 2,
-        name: t("headerTitle"),
-        item: `/${lang}/library`,
-      },
-
-      {
-        "@type": "ListItem",
-        position: 3,
-        name: t("books.headerTitle"),
-        item: `/${lang}/books`,
-      },
-
-      {
-        "@type": "ListItem",
-        position: 4,
-        name: book.title,
-        item: `/${lang}/books/${slug}`,
-      },
-    ],
-  };
+  itemListElement: [
+    {
+      "@type": "ListItem",
+      position: 1,
+      name: lang === "ar" ? "الرئيسية" : "Home",
+      item: `${SITE_URL}/${lang}`,
+    },
+    {
+      "@type": "ListItem",
+      position: 2,
+      name: t("headerTitle"),
+      item: `${SITE_URL}/${lang}/library`,
+    },
+    {
+      "@type": "ListItem",
+      position: 3,
+      name: t("books.headerTitle"),
+      item: `${SITE_URL}/${lang}/books`,
+    },
+    {
+      "@type": "ListItem",
+      position: 4,
+      name: book.title,
+      item: bookUrl,
+    },
+  ],
+};
 
   return (
     <>
