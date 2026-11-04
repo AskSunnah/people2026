@@ -16,7 +16,10 @@ export default async function PinnedSidebar({ sections = [], direction = "ltr" }
   const isRTL = direction === "rtl";
 
   return (
-    <aside dir={direction} className="space-y-6">
+   <aside
+  dir={direction}
+  className={`space-y-6 ${isRTL ? "font-arabic" : ""}`}
+>
       {sections.map((section) => (
         <div
           key={section.id}

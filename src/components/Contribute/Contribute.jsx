@@ -60,10 +60,14 @@ export default function Contribute() {
   };
 
   return (
-    <div
-      className="bg-[#f7f7f7] font-[Segoe_UI,sans-serif] min-h-[69vh] px-4 sm:px-8 md:px-[51px] py-[23px] flex justify-center items-center"
-      dir={isArabic ? "rtl" : "ltr"}
-    >
+   <div
+  className={`bg-[#f7f7f7] min-h-[69vh] px-4 sm:px-8 md:px-[51px] py-[23px] flex justify-center items-center ${
+    isArabic
+      ? "font-arabic"
+      : "font-[Segoe_UI,sans-serif]"
+  }`}
+  dir={isArabic ? "rtl" : "ltr"}
+>
       <div className="flex flex-col md:flex-row bg-white shadow-[0_4px_12px_rgba(0,0,0,0.1)] overflow-hidden max-w-[1000px] w-full">
         <div className="flex-1 px-5 py-6 sm:px-7 sm:py-8 md:px-[30px] md:py-[40px]">
           <h1 className="text-[22px] sm:text-[25px] md:text-[28px] text-[#2c3e50] mb-[10px] font-bold">

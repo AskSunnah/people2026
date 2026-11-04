@@ -15,6 +15,7 @@ const QuestionItemSkeleton = ({ direction = "ltr" }) => {
         border border-[#eee] bg-[#fefefe]
         animate-pulse
         ${isRTL ? "border-r-[5px] border-r-[#e4e4e4]" : "border-l-[5px] border-l-[#e4e4e4]"}
+        ${isRTL ? "font-arabic" : ""}
       `}
     >
       <div className="h-4 bg-gray-200 rounded w-2/3 mb-3" />

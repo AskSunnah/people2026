@@ -9,7 +9,12 @@ export default async function TermsContent() {
   const sections = t.raw("sections");
 
   return (
-    <main dir={dir} className="max-w-[900px] mx-auto my-10 px-5">
+    <main
+  dir={dir}
+  className={`max-w-[900px] mx-auto my-10 px-5 ${
+    isRTL ? "font-arabic" : ""
+  }`}
+>
       <h1
         className={`
           text-[1.8rem] max-md:text-[1.5rem]

@@ -115,16 +115,17 @@ const SearchBarQuestion = ({
   };
 
   return (
-    <div
-      ref={boxRef}
-      className="
-        relative w-full rounded-xl border border-[#e6dcc5]
-        bg-[#fffdf8] px-3 py-3 sm:px-4
-        shadow-[0_4px_14px_rgba(0,0,0,0.05)]
-        focus-within:border-[var(--bg-color-header)]
-        transition-all
-      "
-    >
+   <div
+  ref={boxRef}
+  className={`
+    relative w-full rounded-xl border border-[#e6dcc5]
+    bg-[#fffdf8] px-3 py-3 sm:px-4
+    shadow-[0_4px_14px_rgba(0,0,0,0.05)]
+    focus-within:border-[var(--bg-color-header)]
+    transition-all
+    ${isRTL ? "font-arabic" : ""}
+  `}
+>
       <div className="flex items-center gap-2 sm:gap-3">
         <Search size={17} className="text-[var(--bg-color-header)] shrink-0" />
 
