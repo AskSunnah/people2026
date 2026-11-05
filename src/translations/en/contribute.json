@@ -1,11 +1,10 @@
 {
-
   "seo": {
-    "title": "Contribute to AskSunnah",
-    "description": "Support AskSunnah and help us maintain and grow this platform of authentic Islamic knowledge."
+    "title": "Contribute to Ask Sunnah",
+    "description": "Support Ask Sunnah and help us maintain and grow this platform of authentic Islamic knowledge."
   },
-  "headerTitle": "Contribute to AskSunnah",
-  "heading": "Contribute to AskSunnah",
+  "headerTitle": "Contribute to Ask Sunnah",
+  "heading": "Contribute to Ask Sunnah",
   "motivation": "Your support enables us to maintain and grow this platform of authentic Islamic knowledge.",
   "choosePayment": "Choose a Payment Method",
   "oneTime": "One-Time",
@@ -21,7 +20,7 @@
   "success": {
     "title": "Thank you!",
     "message": "Your donation has been successfully processed.",
-    "backLink": "Go back to AskSunnah"
+    "backLink": "Go back to Ask Sunnah"
   },
   "cancel": {
     "title": "Donation Cancelled",
