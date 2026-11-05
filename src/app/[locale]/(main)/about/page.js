@@ -23,7 +23,7 @@ export default async function AboutPage({ params }) {
     "@type": "AboutPage",
     "@id": `${SITE_URL}/${locale}/about#webpage`,
     url: `${SITE_URL}/${locale}/about`,
-    name: locale === "ar" ? "من نحن" : "About AskSunnah",
+    name: locale === "ar" ? "من نحن" : "About Ask Sunnah",
     inLanguage: locale,
     isPartOf: {
       "@id": `${SITE_URL}/#website`,

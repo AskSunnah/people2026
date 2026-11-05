@@ -1,10 +1,9 @@
 {
-
   "seo": {
     "title": "About Us",
     "description": "Authentic answers from Dr. Sheikh Falah Kurkully — grounded in Qur'an, Sunnah & the Salaf."
   },
-   "headerTitle": "About Us",
+  "headerTitle": "About Us",
   "pageTitle": "About Us",
   "headerSubtitle": "Authentic answers from Dr. Sheikh Falah Kurkully — grounded in Qur'an, Sunnah & the Salaf.",
   "vision": {
@@ -37,7 +36,7 @@
   },
   "bio": {
     "title": "About Dr. Sheikh Falah Kurkully",
-    "text": "Dr. Sheikh Falah Karkoli is a distinguished Islamic scholar who holds a PhD in Hadith Sciences. He studied under renowned scholars such as Sheikh Ibn Uthaymeen, Sheikh Saleh Al-Fawzan, Sheikh Abdul-Muhsin Al-Abbad, Sheikh Muqbil bin Hadi Al-Wadi'i, and Sheikh Abu Bakr Al-Jaza'iri. With decades of experience in teaching and Islamic outreach (da'wah), he provides answers on AskSunnah that are rooted in knowledge, precision, and scholarly integrity."
+    "text": "Dr. Sheikh Falah Karkoli is a distinguished Islamic scholar who holds a PhD in Hadith Sciences. He studied under renowned scholars such as Sheikh Ibn Uthaymeen, Sheikh Saleh Al-Fawzan, Sheikh Abdul-Muhsin Al-Abbad, Sheikh Muqbil bin Hadi Al-Wadi'i, and Sheikh Abu Bakr Al-Jaza'iri. With decades of experience in teaching and Islamic outreach (da'wah), he provides answers on Ask Sunnah that are rooted in knowledge, precision, and scholarly integrity."
   },
   "dua": "O Allah, make us steadfast on the path of guidance, help us adhere to what pleases You, and accept our humble efforts, Ameen."
 }

@@ -9,6 +9,8 @@ const LOCALE_INDEPENDENT_PATHS = [
   "/",
   "/library",
   "/books",
+  "/categories",
+  "/ask",
   "/about",
   "/feedback",
   "/contribute",
@@ -20,7 +22,8 @@ function getLanguageSwitchHref(pathname) {
   if (LOCALE_INDEPENDENT_PATHS.includes(pathname)) return pathname;
   if (LOCALE_SPECIFIC_PREFIXES.some((prefix) => pathname.startsWith(prefix)))
     return "/";
-  // Unknown route shape — safest default is home rather than guessing.
+  // Category pages may not share a path across languages, so land on the topic list
+  if (pathname.startsWith("/categories/")) return "/categories";
   return "/";
 }
 
@@ -41,6 +44,7 @@ export default function Navbar() {
 
   const navItems = [
     { href: "/", label: t("home") },
+    { href: "/categories", label: t("categories") },
     { href: "/library", label: t("library") },
     { href: "/about", label: t("about") },
     { href: "/feedback", label: t("feedback") },

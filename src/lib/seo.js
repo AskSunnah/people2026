@@ -1,5 +1,5 @@
 // src/lib/seo.js
-export const SITE_URL = "https://asksunnah.com";
+export const SITE_URL = "https://www.asksunnah.com";
 export const SITE_NAME = "Ask Sunnah";
 export const DEFAULT_OG_IMAGE = "/og-default.jpg"; // put this file in /public, 1200x630
 

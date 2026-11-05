@@ -2,7 +2,14 @@
 
 import { Link } from "@/i18n/navigation";
 
-const IntroSection = ({ heading, description, buttonLabel, onOpenModal, locale, direction = "ltr" }) => {
+const IntroSection = ({
+  heading,
+  description,
+  buttonLabel,
+  href = "/ask",
+  locale,
+  direction = "ltr",
+}) => {
   const otherLocale = locale === "ar" ? "en" : "ar";
   const switchLabel = locale === "ar" ? "English" : "العربية";
 
@@ -22,14 +29,9 @@ const IntroSection = ({ heading, description, buttonLabel, onOpenModal, locale, 
       <p>{description}</p>
 
       <div className="mt-4 flex items-center">
-        <a
-          href="#"
-          id="openModalBtn"
+        <Link
+          href={href}
           aria-label={buttonLabel}
-          onClick={(e) => {
-            e.preventDefault();
-            onOpenModal();
-          }}
           className="
             inline-block mt-4 px-6 py-3 rounded-md font-semibold no-underline
             text-[#3d3300]
@@ -39,7 +41,7 @@ const IntroSection = ({ heading, description, buttonLabel, onOpenModal, locale, 
           "
         >
           {buttonLabel}
-        </a>
+        </Link>
 
         <Link
           href="/"

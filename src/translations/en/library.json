@@ -2,7 +2,7 @@
   "headerTitle": "Library",
   "seo": {
     "title": "Library",
-    "description": "Browse the AskSunnah Library with English and Arabic books on Aqeedah, Hadith, Fiqh, Seerah and other Islamic topics."
+    "description": "Browse the Ask Sunnah Library with English and Arabic books on Aqeedah, Hadith, Fiqh, Seerah and other Islamic topics."
   },
   "landing": {
     "welcome": "Welcome, seeker of knowledge.",
@@ -12,8 +12,8 @@
   },
   "books": {
     "headerTitle": "English Books",
-    "seoTitle": "Islamic Books | AskSunnah Library",
-    "seoDescription": "Browse Islamic books in English on Aqeedah, Hadith, Fiqh, Seerah and other Islamic topics in the AskSunnah Library.",
+    "seoTitle": "Islamic Books | Ask Sunnah Library",
+    "seoDescription": "Browse Islamic books in English on Aqeedah, Hadith, Fiqh, Seerah and other Islamic topics in the Ask Sunnah Library.",
     "englishBooks": "English Books",
     "arabicBooks": "Arabic Books",
     "read": "Read",

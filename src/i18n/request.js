@@ -21,6 +21,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
     termsMessages,
     contributeMessages,
     LibraryMessages,
+    AskMessages,
   ] = await Promise.all([
     import(`../translations/${locale}/common.json`).then((m) => m.default),
     import(`../translations/${locale}/home.json`).then((m) => m.default),
@@ -32,6 +33,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
     import(`../translations/${locale}/terms.json`).then((m) => m.default),
     import(`../translations/${locale}/contribute.json`).then((m) => m.default),
     import(`../translations/${locale}/library.json`).then((m) => m.default),
+    import(`../translations/${locale}/ask.json`).then((m) => m.default),
   ]);
 
   return {
@@ -47,6 +49,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
       terms: termsMessages,
       contribute: contributeMessages,
       library: LibraryMessages,
+      ask: AskMessages,
     },
   };
 });

@@ -11,7 +11,8 @@
     "about": "عن الموقع",
     "feedback": "شاركنا رأيك",
     "contribute": "ساهم",
-    "switchLanguage": "English"
+    "switchLanguage": "English",
+    "categories": "التصنيفات"
   },
   "footer": {
     "copyright": "© {year} اسأل السنة. جميع الحقوق محفوظة.",
