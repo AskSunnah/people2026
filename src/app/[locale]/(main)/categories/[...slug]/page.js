@@ -13,6 +13,17 @@ import CategoryChips from "@/components/Home/CategoryChips";
 import LibraryCard from "@/components/Home/LibraryCard";
 import AskCard from "@/components/Home/AskCard";
 import RightRail from "@/components/Home/Rightrail";
+function getPath(slug = []) {
+  return slug
+    .map((segment) => {
+      try {
+        return decodeURIComponent(segment);
+      } catch {
+        return segment;
+      }
+    })
+    .join("/");
+}
 
 function getPageNumber(searchParams = {}) {
   const raw = Array.isArray(searchParams.page)
@@ -59,7 +70,7 @@ function getPageList(page, total) {
 export async function generateMetadata({ params, searchParams }) {
   const { locale, slug } = await params;
   const query = await searchParams;
-  const path = slug.join("/");
+  const path = getPath(slug);
   const page = getPageNumber(query);
 
   const result = await getCategoryQuestions(locale, path, page, 12);
@@ -127,7 +138,7 @@ export default async function CategoryDetailPage({ params, searchParams }) {
 
   const query = await searchParams;
   const page = getPageNumber(query);
-  const path = slug.join("/");
+  const path = getPath(slug);
   const isArabic = locale === "ar";
 
   const [result, categories] = await Promise.all([
@@ -392,11 +403,7 @@ export default async function CategoryDetailPage({ params, searchParams }) {
 
           {/* Below xl the right rail is hidden, so show its cards inline */}
           <div className="mt-8 space-y-4 xl:hidden">
-            <LibraryCard
-              locale={locale}
-              topic={category.name}
-              hasTopicBooks={result.bookCount > 0}
-            />
+            <LibraryCard locale={locale} topic={category.name} />
             <AskCard locale={locale} topic={category.name} />
           </div>
 
