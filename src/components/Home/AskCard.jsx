@@ -1,9 +1,12 @@
 // src/components/Home/AskCard.jsx
-// "Can't find your answer?" prompt for category pages.
 import Link from "next/link";
 
 export default function AskCard({ locale, topic, href, className = "" }) {
   const isArabic = locale === "ar";
+  const target =
+    href ||
+    `/${locale}/ask${topic ? `?topic=${encodeURIComponent(topic)}` : ""}`;
+
   return (
     <section
       aria-labelledby="ask-card-heading"
@@ -21,7 +24,7 @@ export default function AskCard({ locale, topic, href, className = "" }) {
           : `Send your question${topic ? ` about ${topic}` : ""} and a scholar will answer it from the Qur'an and Sunnah.`}
       </p>
       <Link
-        href={href || `/${locale}`}
+        href={target}
         className="mt-3 inline-block rounded-lg bg-gradient-to-b from-[#f6e7a0] to-[#c8aa35] px-4 py-2 text-sm font-semibold text-[#3d3000] hover:brightness-95"
       >
         {isArabic ? "اطرح سؤالك" : "Submit your question"}

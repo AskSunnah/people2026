@@ -375,7 +375,7 @@ export default function BookReaderClient({ book, lang, slug }) {
 
     const text = isArabic
       ? `📖 اقرأ هذا الكتاب على موقع السنّة: ${title}`
-      : `📖 Read this book on AskSunnah: ${title}`;
+      : `📖 Read this book on Ask Sunnah: ${title}`;
 
     if (navigator.share) {
       try {

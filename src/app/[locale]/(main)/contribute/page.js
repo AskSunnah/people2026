@@ -24,7 +24,7 @@ export default async function ContributePage({ params }) {
     "@type": "WebPage",
     "@id": `${SITE_URL}/${locale}/contribute#webpage`,
     url: `${SITE_URL}/${locale}/contribute`,
-    name: locale === "ar" ? "المساهمة" : "Contribute to AskSunnah",
+    name: locale === "ar" ? "المساهمة" : "Contribute to Ask Sunnah",
     inLanguage: locale,
     isPartOf: {
       "@id": `${SITE_URL}/#website`,

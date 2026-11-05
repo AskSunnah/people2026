@@ -18,8 +18,8 @@ function createDescription(book, lang) {
   }
 
   return lang === "ar"
-    ? `اقرأ معلومات عن كتاب ${book.title} في مكتبة AskSunnah.`
-    : `Read information about ${book.title} in the AskSunnah Library.`;
+    ? `اقرأ معلومات عن كتاب ${book.title} في مكتبة Ask Sunnah.`
+    : `Read information about ${book.title} in the Ask Sunnah Library.`;
 }
 
 export async function generateMetadata({ params }) {
@@ -41,7 +41,7 @@ export async function generateMetadata({ params }) {
   const description = createDescription(book, lang);
 
   return {
-    title: `${book.title} | AskSunnah`,
+    title: `${book.title} | Ask Sunnah`,
 
     description,
 
@@ -50,7 +50,7 @@ export async function generateMetadata({ params }) {
     },
 
     openGraph: {
-      title: `${book.title} | AskSunnah`,
+      title: `${book.title} | Ask Sunnah`,
       description,
       type: "website",
       url: `/${lang}/books/${slug}`,

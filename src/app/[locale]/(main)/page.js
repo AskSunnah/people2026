@@ -60,11 +60,11 @@ export default async function HomePage({ params }) {
     "@type": "WebPage",
     "@id": `${SITE_URL}/${locale}/#webpage`,
     url: `${SITE_URL}/${locale}`,
-    name: "AskSunnah",
+    name: "Ask Sunnah",
     description:
       locale === "ar"
         ? "اسأل وتصفح الإجابات الإسلامية في مكتبة أسك سنة."
-        : "Explore Islamic questions and answers on AskSunnah.",
+        : "Explore Islamic questions and answers on Ask Sunnah.",
     inLanguage: locale,
     isPartOf: { "@id": `${SITE_URL}/#website` },
     mainEntity: {

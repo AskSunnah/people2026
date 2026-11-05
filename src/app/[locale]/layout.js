@@ -61,13 +61,13 @@ const websiteSchema = {
     {
       "@type": "Organization",
       "@id": `${SITE_URL}/#organization`,
-      name: "AskSunnah",
+      name: "Ask Sunnah",
       url: SITE_URL,
     },
     {
       "@type": "WebSite",
       "@id": `${SITE_URL}/#website`,
-      name: "AskSunnah",
+      name: "Ask Sunnah",
       url: SITE_URL,
       publisher: {
         "@id": `${SITE_URL}/#organization`,
