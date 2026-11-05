@@ -22,7 +22,12 @@ export default async function AboutUs() {
   `;
 
   return (
-    <main dir={dir} className="max-w-[900px] mx-auto my-8 px-4">
+    <main
+  dir={dir}
+  className={`max-w-[900px] mx-auto my-8 px-4 ${
+    isRTL ? "font-arabic" : ""
+  }`}
+>
       <section className={cardClass}>
         <h2>{t("vision.title")}</h2>
         <p>{t("vision.text")}</p>

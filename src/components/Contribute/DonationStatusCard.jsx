@@ -1,19 +1,25 @@
 // src/components/Contribute/DonationStatusCard.jsx
+
+"use client";
+
+import { useLocale } from "next-intl";
 import { Link } from "@/i18n/navigation";
+
 
 export default function DonationStatusCard({ variant, title, message, linkLabel }) {
   const isSuccess = variant === "success";
+  const locale = useLocale();
+const isArabic = locale === "ar";
 
   return (
     <div
-      className="
-        font-[var(--font-family)]
-        bg-[var(--page-background)]
-        min-h-[60vh]
-        flex justify-center items-center
-        p-5
-      "
-    >
+     className={`
+  ${isArabic ? "font-arabic" : "font-[var(--font-family)]"}
+  bg-[var(--page-background)]
+  min-h-[60vh]
+  flex justify-center items-center
+  p-5
+`}>
       <div
         className="
           bg-white

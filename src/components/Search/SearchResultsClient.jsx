@@ -107,7 +107,9 @@ export default function SearchResultsClient({
 
   return (
     <>
-      <div className={isRTL ? "text-right" : "text-left"}>
+      <div
+  className={`${isRTL ? "text-right font-arabic" : "text-left"}`}
+>
         <h1 className="m-0 text-[1.15rem] sm:text-[1.4rem] font-bold text-[var(--bg-color-header)]">
           {t("title")}
         </h1>

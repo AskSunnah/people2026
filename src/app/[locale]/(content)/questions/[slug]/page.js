@@ -1,8 +1,7 @@
 // src/app/[locale]/(content)/questions/[slug]/page.js
 import { notFound } from "next/navigation";
 import { setRequestLocale, getTranslations } from "next-intl/server";
-import { buildAlternates } from "@/lib/seo";
-
+import { buildAlternates, buildMetadata, SITE_URL } from "@/lib/seo";
 import { getQuestionBySlug } from "@/services/question.service";
 import { getPinnedSections } from "@/services/pinned.service";
 
@@ -11,7 +10,6 @@ import QuestionContent from "@/components/Question/QuestionContent";
 import QuestionSearchBar from "@/components/Question/QuestionSearchBar";
 import PinnedSidebar from "@/components/Question/PinnedSidebar";
 import RelatedAnswersSidebar from "@/components/Question/RelatedAnswersSidebar";
-import { buildMetadata } from "@/lib/seo";
 
 export async function generateMetadata({ params }) {
   const { locale, slug } = await params;
@@ -42,6 +40,26 @@ export default async function QuestionDetailPage({ params, searchParams }) {
   if (!data) {
     notFound();
   }
+
+    const articleSchema = {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "@id": `${SITE_URL}/${locale}/questions/${slug}#article`,
+    "headline": data.heading,
+    "description": (data.conclusion || data.answer || "")
+      .replace(/\s+/g, " ")
+      .trim()
+      .slice(0, 300),
+    "articleBody": data.answer || data.conclusion || "",
+    "inLanguage": locale,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `${SITE_URL}/${locale}/questions/${slug}`,
+    },
+    "publisher": {
+      "@id": `${SITE_URL}/#organization`,
+    },
+  };
 
   const t = await getTranslations("question");
 
@@ -74,7 +92,16 @@ export default async function QuestionDetailPage({ params, searchParams }) {
 
   return (
     <>
+
+      <script
+      type="application/ld+json"
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(articleSchema).replace(/</g, "\\u003c"),
+      }}
+    />
+
       <div className="sticky top-0 z-20 bg-[var(--bg-main)] max-w-[1320px] mx-auto px-4 pt-4 pb-3 max-[768px]:px-3">
+            
         <QuestionSearchBar
           direction={direction}
           placeholder={t("searchPlaceholder")}
