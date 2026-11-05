@@ -8,6 +8,8 @@ import { SITE_URL } from "@/lib/seo";
 import PinnedSection from "@/components/Home/PinnedSection";
 import AskQuestionSection from "@/components/Home/AskQuestionSection";
 import RecentAnswers from "@/components/Home/RecentAnswers";
+import { getCategories } from "@/services/category.service";
+import CategorySection from "@/components/Home/CategorySection";
 
 export async function generateMetadata({ params }) {
   const { locale } = await params;
@@ -26,14 +28,11 @@ export default async function HomePage({ params }) {
 
   const direction = locale === "ar" ? "rtl" : "ltr";
 
-  const [answersResult, pinned] = await Promise.allSettled([
+  const [answersResult, pinned, categoriesResult] = await Promise.allSettled([
     getRecentAnswers(locale),
     getPinnedSections(locale),
+    getCategories(locale, true),
   ]);
-
-  // Old React app did `data.slice().reverse()` to show newest first —
-  // keeping that here. If your backend already returns newest-first,
-  // drop the .reverse().
   const answers =
     answersResult.status === "fulfilled" && Array.isArray(answersResult.value)
       ? answersResult.value.slice().reverse()
@@ -43,46 +42,51 @@ export default async function HomePage({ params }) {
     pinned.status === "fulfilled" && pinned.value?.active
       ? pinned.value.sections || []
       : [];
+  const categories =
+    categoriesResult.status === "fulfilled" &&
+    Array.isArray(categoriesResult.value)
+      ? categoriesResult.value
+      : [];
 
-      const homeSchema = {
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "@id": `${SITE_URL}/${locale}/#webpage`,
-  url: `${SITE_URL}/${locale}`,
-  name: "AskSunnah",
-  description:
-    locale === "ar"
-      ? "اسأل وتصفح الإجابات الإسلامية في مكتبة أسك سنة."
-      : "Explore Islamic questions and answers on AskSunnah.",
-  inLanguage: locale,
-  isPartOf: {
-    "@id": `${SITE_URL}/#website`,
-  },
-  mainEntity: {
-    "@type": "ItemList",
-    "@id": `${SITE_URL}/${locale}/#recent-answers`,
-    name: locale === "ar" ? "أحدث الإجابات" : "Recent Answers",
-    itemListOrder: "https://schema.org/ItemListOrderDescending",
-    numberOfItems: answers.length,
-    itemListElement: answers.slice(0, 5).map((item, index) => ({
-      "@type": "ListItem",
-      position: index + 1,
-      url: `${SITE_URL}/${locale}/questions/${item.slug}`,
-      name: item.heading,
-    })),
-  },
-};
+  const homeSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "@id": `${SITE_URL}/${locale}/#webpage`,
+    url: `${SITE_URL}/${locale}`,
+    name: "AskSunnah",
+    description:
+      locale === "ar"
+        ? "اسأل وتصفح الإجابات الإسلامية في مكتبة أسك سنة."
+        : "Explore Islamic questions and answers on AskSunnah.",
+    inLanguage: locale,
+    isPartOf: {
+      "@id": `${SITE_URL}/#website`,
+    },
+    mainEntity: {
+      "@type": "ItemList",
+      "@id": `${SITE_URL}/${locale}/#recent-answers`,
+      name: locale === "ar" ? "أحدث الإجابات" : "Recent Answers",
+      itemListOrder: "https://schema.org/ItemListOrderDescending",
+      numberOfItems: answers.length,
+      itemListElement: answers.slice(0, 5).map((item, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        url: `${SITE_URL}/${locale}/questions/${item.slug}`,
+        name: item.heading,
+      })),
+    },
+  };
 
   return (
     <>
-    <script
-  type="application/ld+json"
-  dangerouslySetInnerHTML={{
-    __html: JSON.stringify(homeSchema).replace(/</g, "\\u003c"),
-  }}
-/>
-    <div
-      className="
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(homeSchema).replace(/</g, "\\u003c"),
+        }}
+      />
+      <div
+        className="
         max-w-[900px] mx-auto my-8 px-6 py-6
         bg-[var(--bg-main)] text-[var(--text-main)]
         rounded-[10px] shadow-[2px_3px_12px_rgba(0,0,0,0.14)]
@@ -90,19 +94,20 @@ export default async function HomePage({ params }) {
         [&_h2]:text-[var(--bg-color-header)] [&_h3]:text-[var(--bg-color-header)]
         max-md:px-4 max-md:py-4 max-md:mx-4 max-md:bg-white max-md:rounded-none max-md:shadow-none
       "
-    >
-      {pinnedSections.length > 0 && (
-        <PinnedSection sections={pinnedSections} direction={direction} />
-      )}
+      >
+        {pinnedSections.length > 0 && (
+          <PinnedSection sections={pinnedSections} direction={direction} />
+        )}
 
-      <AskQuestionSection direction={direction} locale={locale} />
+        <AskQuestionSection direction={direction} locale={locale} />
 
-      <RecentAnswers
-        initialAnswers={answers}
-        direction={direction}
-        locale={locale}
-      />
-    </div>
+        <CategorySection categories={categories} locale={locale} />
+        <RecentAnswers
+          initialAnswers={answers}
+          direction={direction}
+          locale={locale}
+        />
+      </div>
     </>
   );
 }
