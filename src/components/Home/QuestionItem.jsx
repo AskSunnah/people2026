@@ -1,6 +1,18 @@
 import { Link } from "@/i18n/navigation";
 import HighlightText from "./HighlightText";
 
+// Used only when the API didn't provide a server snippet (e.g. the home list)
+function fallbackExcerpt(answer = "", max = 150) {
+  const clean = answer
+    .replace(/\[\[?([^\]]*)\]\]?(\([^)]*\))?/g, "$1")
+    .replace(/https?:\/\/\S+/g, "")
+    .replace(/[#*_>`]/g, "")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (clean.length <= max) return clean;
+  return clean.slice(0, clean.lastIndexOf(" ", max)) + "…";
+}
+
 const QuestionItem = ({
   item,
   index,
@@ -12,21 +24,22 @@ const QuestionItem = ({
 }) => {
   const isRTL = direction === "rtl";
 
-  // IMPORTANT: don't derive locale from item.lang here. Recent-answers
-  // and search-result items come from endpoints that are already
-  // scoped to one language (/api/all, /api/ar/all, /api/search?lang=),
-  // so individual items never carry their own `.lang` field — it's
-  // implied by which page/list rendered them. Use the locale the list
-  // itself was fetched with. (Pinned/related items are different: those
-  // genuinely can mix languages within one section, and do carry a real
-  // per-item `.lang` from the backend — see PinnedSection/PinnedSidebar.)
+  // Don't derive locale from item.lang: list endpoints are already
+  // scoped to one language (see original comment). Use the list's locale.
   const backPage = currentPage > 1 ? `?page=${currentPage}` : "";
 
   const questionTitle = item.heading || item.question || "";
-  const snippet = item.answer ? item.answer.slice(0, 150).trim() : "";
 
-  const formattedDate = item.date
-    ? new Date(item.date).toLocaleDateString(isRTL ? "ar" : "en", {
+  // Search results: server-built snippet { text, ranges }
+  // Other lists: fall back to a cleaned excerpt of the answer
+  const hasServerSnippet = Boolean(item.snippet?.text);
+  const snippetText = hasServerSnippet
+    ? item.snippet.text
+    : fallbackExcerpt(item.answer);
+
+  const dateValue = item.date || item.createdAt;
+  const formattedDate = dateValue
+    ? new Date(dateValue).toLocaleDateString(isRTL ? "ar" : "en", {
         year: "numeric",
         month: "short",
         day: "numeric",
@@ -67,7 +80,11 @@ const QuestionItem = ({
             {labelPrefix}
             {index + 1}:
           </strong>{" "}
-          <HighlightText text={questionTitle} query={highlightQuery} />
+          <HighlightText
+            text={questionTitle}
+            ranges={item.headingRanges}
+            query={highlightQuery}
+          />
         </span>
 
         {(formattedDate || item.category) && (
@@ -85,9 +102,17 @@ const QuestionItem = ({
         )}
       </div>
 
-      {snippet && (
-        <p className="text-[0.82rem] sm:text-[0.88rem] leading-relaxed text-gray-500 line-clamp-2 m-0">
-          <HighlightText text={`${snippet}…`} query={highlightQuery} />
+      {snippetText && (
+        <p className="text-[0.82rem] sm:text-[0.88rem] leading-relaxed text-gray-500 line-clamp-3 m-0">
+          {hasServerSnippet ? (
+            <HighlightText
+              text={snippetText}
+              ranges={item.snippet.ranges || []}
+            />
+          ) : (
+            // no server ranges: only highlight if a query was passed
+            <HighlightText text={snippetText} query={highlightQuery} />
+          )}
         </p>
       )}
     </Link>

@@ -13,7 +13,6 @@ import QuestionItemSkeleton from "@/components/common/QuestionItemSkeleton";
 import { searchAnswers } from "@/services/question.service";
 
 const ITEMS_PER_PAGE = 5;
-
 export default function SearchResultsClient({
   initialResults = [],
   initialTotal = 0,
@@ -21,6 +20,7 @@ export default function SearchResultsClient({
   direction = "ltr",
   locale = "en",
 }) {
+  const [tooShort, setTooShort] = useState(false);
   const t = useTranslations("search");
 
   const router = useRouter();
@@ -68,7 +68,7 @@ export default function SearchResultsClient({
           lang: locale,
           signal: controller.signal,
         });
-
+        setTooShort(Boolean(data.tooShort));
         setResults(data.results || []);
         setTotalItems(data.totalItems || data.total || 0);
       } catch (err) {
@@ -102,14 +102,13 @@ export default function SearchResultsClient({
   };
 
   const handlePageChange = (newPage) => updateParams({ page: newPage });
-  const handleNewSearch = (newQuery) => updateParams({ q: newQuery, page: "1" });
+  const handleNewSearch = (newQuery) =>
+    updateParams({ q: newQuery, page: "1" });
   const clearSearch = () => router.replace("/");
 
   return (
     <>
-      <div
-  className={`${isRTL ? "text-right font-arabic" : "text-left"}`}
->
+      <div className={`${isRTL ? "text-right font-arabic" : "text-left"}`}>
         <h1 className="m-0 text-[1.15rem] sm:text-[1.4rem] font-bold text-[var(--bg-color-header)]">
           {t("title")}
         </h1>
@@ -168,7 +167,14 @@ export default function SearchResultsClient({
           <p className="text-red-600 font-semibold text-base">{error}</p>
         </div>
       )}
-
+      {!loading && !error && query && tooShort && (
+        <div className="flex flex-col items-center justify-center py-12 gap-3 text-center">
+          <Inbox size={32} className="text-[var(--bg-color-header)]" />
+          <p className="text-[var(--bg-color-header)] font-semibold text-base">
+            {t("tooShort")}
+          </p>
+        </div>
+      )}
       {!loading && !error && query && results.length === 0 && (
         <div className="flex flex-col items-center justify-center py-12 gap-3 text-center">
           <Inbox size={32} className="text-[var(--bg-color-header)]" />
