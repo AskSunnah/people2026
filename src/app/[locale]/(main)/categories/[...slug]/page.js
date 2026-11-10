@@ -214,7 +214,7 @@ export default async function CategoryDetailPage({ params, searchParams }) {
 
       <div className="mx-auto my-8 grid max-w-[1280px] items-start gap-6 px-4 lg:grid-cols-[220px_minmax(0,1fr)] xl:grid-cols-[230px_minmax(0,1fr)_260px] max-md:my-0 max-md:px-0">
         {/* Left rail: topic tree with the current topic expanded */}
-        <aside className="sticky top-4 hidden lg:block">
+        <aside className="sticky top-24 hidden max-h-[calc(100vh-7rem)] overflow-y-auto lg:block">
           <CategorySidebar
             categories={categories}
             locale={locale}
@@ -414,7 +414,7 @@ export default async function CategoryDetailPage({ params, searchParams }) {
         </main>
 
         {/* Right rail (xl+): books on this topic, ask, contribute */}
-        <aside className="sticky top-4 hidden xl:block">
+        <aside className="sticky top-24 hidden max-h-[calc(100vh-7rem)] overflow-y-auto xl:block">
           <RightRail locale={locale} topic={category.name} showAsk />
         </aside>
       </div>

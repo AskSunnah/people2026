@@ -123,7 +123,7 @@ export default async function HomePage({ params }) {
           max-md:my-0 max-md:px-0"
       >
         {/* Left rail (from lg) */}
-        <aside className="sticky top-4 hidden lg:block">
+        <aside className="sticky top-24 hidden max-h-[calc(100vh-7rem)] overflow-y-auto lg:block">
           <CategorySidebar categories={categories} locale={locale} />
         </aside>
 
@@ -157,7 +157,7 @@ export default async function HomePage({ params }) {
         </main>
 
         {/* Right rail */}
-        <aside className="sticky top-4 hidden xl:block">
+        <aside className="sticky top-24 hidden max-h-[calc(100vh-7rem)] overflow-y-auto xl:block">
           <RightRail locale={locale} bookCount={bookCount} />
         </aside>
       </div>

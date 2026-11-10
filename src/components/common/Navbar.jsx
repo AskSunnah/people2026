@@ -91,7 +91,7 @@ export default function Navbar() {
         ${isArabic ? "font-[var(--font-noto-arabic)]" : "font-[var(--font-family)]"}
         text-[var(--text-main)]
         transition-transform duration-300 ease-in-out
-        ${hidden ? "-translate-y-full" : "translate-y-0"}
+       ${hidden ? "max-md:-translate-y-full" : ""}
       `}
     >
       <button
