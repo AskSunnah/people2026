@@ -1,7 +1,7 @@
 "use client";
 
 // src/components/common/ReportableContent.jsx
-import React, { useState } from "react";
+import React, { useState, createContext, useContext } from "react";
 import { createPortal } from "react-dom";
 import { Flag, X, Check } from "lucide-react";
 import { submitReport } from "@/services/report.service";
@@ -373,6 +373,27 @@ function ReportModalUI({
   );
 }
 
+
+const ReportContext = createContext(null);
+
+export function ReportFlagButton({ lang = "en", className = "" }) {
+  const ctx = useContext(ReportContext);
+  if (!ctx) return null;
+  const t = LABELS[lang] || LABELS.en;
+
+  return (
+    <button
+      type="button"
+      onClick={ctx.open}
+      title={t.startButton}
+      aria-label={t.startButton}
+      className={`bg-white border border-[#ccc] text-[#c3a421] rounded-[8px] cursor-pointer px-2.5 py-1.5 flex items-center justify-center h-8 transition-all duration-200 hover:text-[#c3a421] hover:border-[#c3a421] hover:scale-105 ${className}`}
+    >
+      <Flag size={15} />
+    </button>
+  );
+}
+
 // ─── For QuestionPage / Fatwa — wraps content, shows a trigger button ─────────
 export function ReportableContent({
   lang = "en",
@@ -393,45 +414,61 @@ export function ReportableContent({
 
   const [panelOpen, setPanelOpen] = useState(false);
 
-  return (
-    <>
-      <div className={`relative ${className}`}>
-        {children}
+  // return (
+  //   <>
+  //     <div className={`relative ${className}`}>
+  //       {children}
 
-        {/* Report button */}
-        <div
-          dir={isRTL ? "rtl" : "ltr"}
-          className="mt-8 mb-4 flex justify-center"
-        >
-          <button
-            type="button"
-            onClick={() => setPanelOpen(true)}
-            className="flex items-center gap-2 text-[0.82rem] font-medium text-[#5c4712] bg-[#fffaf0] border border-[#e6cf7a] rounded-full px-4 py-2 cursor-pointer hover:bg-[#fff3c4] transition-colors"
-          >
-            <Flag size={13} />
-            {t.startButton}
-          </button>
-        </div>
-      </div>
+  //       {/* Report button */}
+  //       <div
+  //         dir={isRTL ? "rtl" : "ltr"}
+  //         className="mt-8 mb-4 flex justify-center"
+  //       >
+  //         <button
+  //           type="button"
+  //           onClick={() => setPanelOpen(true)}
+  //           className="flex items-center gap-2 text-[0.82rem] font-medium text-[#5c4712] bg-[#fffaf0] border border-[#e6cf7a] rounded-full px-4 py-2 cursor-pointer hover:bg-[#fff3c4] transition-colors"
+  //         >
+  //           <Flag size={13} />
+  //           {t.startButton}
+  //         </button>
+  //       </div>
+  //     </div>
 
-      <ReportModalUI
-        open={panelOpen}
-        onClose={() => setPanelOpen(false)}
-        t={t}
-        isRTL={isRTL}
-        reasonKeys={reasonKeys}
-        reasonLabels={reasonLabels}
-        submitPayload={{
-          contentType,
-          lang,
-          slug,
-          bookId,
-          chapterNumber,
-          pageNumber,
-        }}
-      />
-    </>
-  );
+  //     <ReportModalUI
+  //       open={panelOpen}
+  //       onClose={() => setPanelOpen(false)}
+  //       t={t}
+  //       isRTL={isRTL}
+  //       reasonKeys={reasonKeys}
+  //       reasonLabels={reasonLabels}
+  //       submitPayload={{
+  //         contentType,
+  //         lang,
+  //         slug,
+  //         bookId,
+  //         chapterNumber,
+  //         pageNumber,
+  //       }}
+  //     />
+  //   </>
+  // );
+
+return (
+  <ReportContext.Provider value={{ open: () => setPanelOpen(true) }}>
+    <div className={`relative ${className}`}>{children}</div>
+
+    <ReportModalUI
+      open={panelOpen}
+      onClose={() => setPanelOpen(false)}
+      t={t}
+      isRTL={isRTL}
+      reasonKeys={reasonKeys}
+      reasonLabels={reasonLabels}
+      submitPayload={{ contentType, lang, slug, bookId, chapterNumber, pageNumber }}
+    />
+  </ReportContext.Provider>
+);
 }
 
 // ─── For ReadBook — controlled externally, no trigger button ─────────────────
