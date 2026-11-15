@@ -3,6 +3,7 @@
 import { Link } from "@/i18n/navigation";
 
 export default function BookCard({ book, getCategoryLabel, onDownload, t }) {
+  const hasDownload = Boolean(book.download?.driveFileId);
   return (
     <div
       data-category={book.category}
@@ -48,7 +49,7 @@ export default function BookCard({ book, getCategoryLabel, onDownload, t }) {
         </div>
 
         {/* Buttons */}
-        <div className="flex gap-2 mt-auto">
+     <div className="flex gap-2 mt-auto justify-center">
           <Link
             href={`/library/read/${book.slug}`}
             className="flex items-center gap-1.5 flex-1 justify-center bg-[#c9a227] text-[#3a2000] py-[0.48rem] px-3 rounded-[6px] no-underline font-bold text-[0.82rem] transition-opacity hover:opacity-80"
@@ -71,6 +72,7 @@ export default function BookCard({ book, getCategoryLabel, onDownload, t }) {
             {t("books.read")}
           </Link>
 
+{hasDownload && (
           <button
             type="button"
             onClick={() => onDownload(book._id)}
@@ -93,6 +95,7 @@ export default function BookCard({ book, getCategoryLabel, onDownload, t }) {
 
             {t("books.download")}
           </button>
+)}
         </div>
       </div>
     </div>
