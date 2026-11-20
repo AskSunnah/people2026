@@ -1,11 +1,51 @@
 import { getLocale } from "next-intl/server";
 
+import { SITE_URL } from "@/lib/seo";
+import { getBooks } from "@/services/library.service";
 import HoverHadith from "@/components/Library/HoverHadith";
 import LibraryButtons from "@/components/Library/LibraryButtons";
+import BookShelf from "@/components/Library/BookShelf";
+
+const CATEGORY_SHELVES = ["aqeedah", "hadith", "fiqh", "seerah"];
+const REVALIDATE = 3600;
+
+const unwrap = (result) =>
+  result.status === "fulfilled"
+    ? { books: result.value?.books || [], total: result.value?.total || 0 }
+    : { books: [], total: 0 };
 
 export default async function LibraryLanding() {
   const locale = await getLocale();
   const dir = locale === "ar" ? "rtl" : "ltr";
+  const t = await getTranslations("library");
+
+  const [recentResult, ...categoryResults] = await Promise.allSettled([
+    getBooks({
+      lang: locale,
+      limit: 8,
+      sort: "newest",
+      revalidate: REVALIDATE,
+    }),
+    ...CATEGORY_SHELVES.map((category) =>
+      getBooks({ lang: locale, limit: 4, category, revalidate: REVALIDATE }),
+    ),
+  ]);
+
+  const recent = unwrap(recentResult);
+
+  const listSchema = recent.books.length
+    ? {
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: t("landing.recentlyAdded"),
+        itemListElement: recent.books.map((book, i) => ({
+          "@type": "ListItem",
+          position: i + 1,
+          url: `${SITE_URL}/${locale}/library/read/${book.slug}`,
+          name: book.title,
+        })),
+      }
+    : null;
 
   return (
     <div

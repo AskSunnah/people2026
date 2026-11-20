@@ -8,7 +8,10 @@
     "welcome": "Welcome, seeker of knowledge.",
     "englishBooks": "English Books",
     "arabicBooks": "Arabic Books",
-    "hoverHint": "Hover to read"
+    "hoverHint": "Hover to read",
+    "intro": "Read Islamic books online for free, in Arabic and English, on Aqeedah, Hadith, Fiqh, Seerah and more.",
+    "recentlyAdded": "Recently added",
+    "viewAll": "View all"
   },
   "books": {
     "headerTitle": "English Books",
