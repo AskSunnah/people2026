@@ -103,7 +103,7 @@ export default async function Footer() {
   return (
     <footer
       dir={isRTL ? "rtl" : "ltr"}
-      className={`border-t border-[#e9dfbd] bg-white text-[var(--text-main)] ${isRTL ? "font-arabic" : ""}`}
+      className={`border-t border-[#e9dfbd] bg-orange-50 text-[var(--text-main)] ${isRTL ? "font-arabic" : ""}`}
     >
       <div className="mx-auto max-w-[1280px] px-6 py-12">
         <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1.3fr]">

@@ -1,61 +1,58 @@
-import { getLocale } from "next-intl/server";
+import { getLocale, getTranslations } from "next-intl/server";
 
-import { SITE_URL } from "@/lib/seo";
-import { getBooks } from "@/services/library.service";
 import HoverHadith from "@/components/Library/HoverHadith";
 import LibraryButtons from "@/components/Library/LibraryButtons";
-import BookShelf from "@/components/Library/BookShelf";
+import LibraryShelf from "@/components/Library/LibraryShelf";
 
-const CATEGORY_SHELVES = ["aqeedah", "hadith", "fiqh", "seerah"];
-const REVALIDATE = 3600;
+import { getBooks } from "@/services/library.service";
 
-const unwrap = (result) =>
-  result.status === "fulfilled"
-    ? { books: result.value?.books || [], total: result.value?.total || 0 }
-    : { books: [], total: 0 };
+const MAIN_COUNT = 6;
+const SIDE_COUNT = 4;
+
+const fetchPreview = (lang, limit) =>
+  getBooks({
+    lang,
+    page: 1,
+    limit,
+    search: "",
+    category: "all",
+    author: "all",
+    sort: "author_timeline_asc",
+  }).catch(() => null);
 
 export default async function LibraryLanding() {
   const locale = await getLocale();
   const dir = locale === "ar" ? "rtl" : "ltr";
-  const t = await getTranslations("library");
 
-  const [recentResult, ...categoryResults] = await Promise.allSettled([
-    getBooks({
-      lang: locale,
-      limit: 8,
-      sort: "newest",
-      revalidate: REVALIDATE,
-    }),
-    ...CATEGORY_SHELVES.map((category) =>
-      getBooks({ lang: locale, limit: 4, category, revalidate: REVALIDATE }),
-    ),
+  // main column = current language, side column = the other one
+  const mainLang = locale === "ar" ? "ar" : "en";
+  const sideLang = mainLang === "ar" ? "en" : "ar";
+
+  const [t, tMain, tSide, main, side] = await Promise.all([
+    getTranslations("library.landing"),
+    getTranslations({ locale: mainLang, namespace: "library.landing" }),
+    getTranslations({ locale: sideLang, namespace: "library.landing" }),
+    fetchPreview(mainLang, MAIN_COUNT),
+    fetchPreview(sideLang, SIDE_COUNT),
   ]);
 
-  const recent = unwrap(recentResult);
+  const title = (tr, lang) =>
+    tr(lang === "ar" ? "arabicTitle" : "englishTitle");
+  const browse = (tr, lang) =>
+    tr(lang === "ar" ? "browseArabic" : "browseEnglish");
 
-  const listSchema = recent.books.length
-    ? {
-        "@context": "https://schema.org",
-        "@type": "ItemList",
-        name: t("landing.recentlyAdded"),
-        itemListElement: recent.books.map((book, i) => ({
-          "@type": "ListItem",
-          position: i + 1,
-          url: `${SITE_URL}/${locale}/library/read/${book.slug}`,
-          name: book.title,
-        })),
-      }
-    : null;
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    itemListElement: [...(main?.books || []), ...(side?.books || [])].map(
+      (b, i) => ({ "@type": "ListItem", position: i + 1, name: b.title }),
+    ),
+  };
 
   return (
     <div
       dir={dir}
-      className="
-        flex flex-1
-        items-center justify-center
-        p-8
-        font-[var(--font-family)]
-      "
+      className="flex flex-1 flex-col items-center gap-8 px-4 pb-12 pt-12 sm:px-8 sm:pt-16 font-[var(--font-family)]"
       style={{
         background:
           'linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.3)), url("/books.jpeg")',
@@ -63,38 +60,77 @@ export default async function LibraryLanding() {
         backgroundPosition: "center",
       }}
     >
-      <main
-        dir={dir}
-        className="
-          w-[95%]
-          max-w-[95%]
-          sm:max-w-[85%]
-          md:max-w-[70%]
-          lg:max-w-[55%]
-          xl:max-w-[50%]
+      {/* WELCOME */}
+      <h1 className="px-4 text-center font-bold">
+        <HoverHadith />
+      </h1>
 
-          px-6 py-10
-          sm:px-10 sm:py-12
+      {/* SEARCH */}
+      <div className="w-full max-w-6xl rounded-2xl px-5 py-4 shadow-xl">
+        <form
+          action={`/${locale}/books`}
+          method="get"
+          role="search"
+          className="mx-auto flex w-full max-w-2xl overflow-hidden rounded-md border border-[#e3d28a] bg-white"
+        >
+          <input
+            type="search"
+            name="search"
+            placeholder={t("searchPlaceholder")}
+            aria-label={t("searchPlaceholder")}
+            className="min-w-0 flex-1 bg-transparent px-4 py-2.5 text-sm outline-none"
+          />
+          <button
+            type="submit"
+            className="bg-[#c9a227] px-5 text-sm font-semibold text-white hover:brightness-95"
+          >
+            {t("search")}
+          </button>
+        </form>
+      </div>
 
-          mx-auto
+      {/* MAIN (current language) + SIDE (other language) */}
+      <div className="grid w-full max-w-6xl grid-cols-1 items-start gap-6 lg:grid-cols-3">
+        <div className="lg:col-span-2">
+          <LibraryShelf
+            title={title(tMain, mainLang)}
+            books={main?.books}
+            total={main?.total ? tMain("count", { count: main.total }) : null}
+            browseLabel={browse(tMain, mainLang)}
+            lang={mainLang}
+            actions={
+              <LibraryButtons
+                lang={mainLang}
+                label={tMain(
+                  mainLang === "ar" ? "viewAllArabic" : "viewAllEnglish",
+                )}
+              />
+            }
+          />
+        </div>
 
-          rounded-[12px]
+        <LibraryShelf
+          compact
+          title={title(tSide, sideLang)}
+          books={side?.books}
+          total={side?.total ? tSide("count", { count: side.total }) : null}
+          browseLabel={browse(tSide, sideLang)}
+          lang={sideLang}
+          actions={
+            <LibraryButtons
+              lang={sideLang}
+              label={tSide(
+                sideLang === "ar" ? "viewAllArabic" : "viewAllEnglish",
+              )}
+            />
+          }
+        />
+      </div>
 
-          flex flex-col
-          items-center justify-center
-
-          text-center
-
-          bg-[var(--bg-light)]
-          text-[var(--text-main)]
-        "
-      >
-        <h1 className="pt-[30px] pb-4 font-bold">
-          <HoverHadith />
-        </h1>
-
-        <LibraryButtons />
-      </main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
     </div>
   );
 }
