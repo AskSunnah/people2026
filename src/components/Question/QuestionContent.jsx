@@ -1,6 +1,7 @@
 // src/components/Question/QuestionContent.jsx
 import { Link } from "@/i18n/navigation";
 import ShareButton from "./ShareButton";
+import { ReportFlagButton } from "@/components/common/ReportableContent";
 
 // {{slug|label}} -> internal link (same locale as the current page)
 // [[url|label]] -> external link, opens in a new tab
@@ -156,12 +157,13 @@ export default function QuestionContent({ data, direction, locale, t, backHref }
         {data.heading}
       </h1>
 
-      <div className={`flex mb-5 ${isRTL ? "justify-start" : "justify-end"}`}>
+      <div className={`flex mb-5 gap-2 ${isRTL ? "justify-start" : "justify-end"}`}>
         <ShareButton
           heading={data.heading}
           shareText={t("shareText")}
           copiedMessage={t("linkCopied")}
         />
+        <ReportFlagButton lang={locale} />
       </div>
 
       <p className={`mb-5 leading-[1.8] ${isRTL ? "text-right" : "text-left"}`}>
