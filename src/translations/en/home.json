@@ -1,12 +1,12 @@
 {
   "seo": {
-    "title": "Ask Sunnah – Islamic Questions & Answers",
-    "description": "Ask questions about Islam and explore authentic answers based on the Qur’an and Sunnah."
+    "title": "Islamic Q&A Based on the Qur'an and Sunnah",
+    "description": "Ask your Islamic questions and read evidence-based answers from the Qur'an and Sunnah, with a free online library of Islamic books in Arabic and English."
   },
 
   "intro": {
     "heading": "Ask about your Religion",
-    "description": "Send your question and receive an authentic, evidence-based answer drawn from the Qur’an and Sunnah, according to the understanding of the Salaf of this Ummah and the explanations of trusted scholars, answered by Dr. Sheikh Falah Kurkully",
+    "description": "Receive your answers provided by Sunni scholars and students of knowledge under the supervision of Dr. Sheikh Falah Kurkully.",
     "askButton": "Submit Your Question"
   },
   "recentAnswers": {

@@ -76,7 +76,8 @@ export default function HoverHadith() {
       <span
         className="
     text-[clamp(1.25rem,3vw,2rem)]
-    text-[#2b2b2b]
+    text-white
+    [text-shadow:0_2px_12px_rgba(0,0,0,0.6)]
     cursor-pointer
     transition-colors
     duration-300

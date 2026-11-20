@@ -41,12 +41,14 @@ export default function Controls({
       className="fixed bottom-0 left-0 right-0 z-40 bg-[var(--bg-main)] border-t border-[var(--border-color)] shadow-[0_-4px_16px_rgba(0,0,0,0.12)]"
     >
       {/* Progress bar — golden fill on a light track */}
-      <div className="h-2 w-full bg-[var(--border-color)]">
+      <div className="h-2 w-full bg-[var(--border-color)] relative overflow-hidden">
         <div
-          className="h-full transition-all duration-300 ease-out"
+          className="h-full transition-all duration-300 ease-out absolute top-0"
           style={{
             width: `${progress}%`,
             background: "var(--button-gradient)",
+            left: isRTL ? "auto" : 0,
+            right: isRTL ? 0 : "auto",
           }}
         />
       </div>
@@ -61,13 +63,23 @@ export default function Controls({
         <div className="flex items-center gap-2 sm:gap-3">
           <button
             onClick={() => {
-              if (currentPage > 0) setCurrentPage(currentPage - 1);
+              if (isRTL) {
+                if (currentPage < totalPages - 1) {
+                  setCurrentPage(currentPage + 1);
+                }
+              } else {
+                if (currentPage > 0) {
+                  setCurrentPage(currentPage - 1);
+                }
+              }
             }}
-            disabled={currentPage === 0}
+            disabled={
+              isRTL ? currentPage === totalPages - 1 : currentPage === 0
+            }
             className={navBtnClass}
             style={{ background: "var(--button-gradient)" }}
-            title={isRTL ? "الصفحة السابقة" : "Previous page"}
-            aria-label={isRTL ? "الصفحة السابقة" : "Previous page"}
+            title={isRTL ? "الصفحة التالية" : "Previous page"}
+            aria-label={isRTL ? "الصفحة التالية" : "Previous page"}
           >
             ‹
           </button>
@@ -93,13 +105,23 @@ export default function Controls({
 
           <button
             onClick={() => {
-              if (currentPage < totalPages - 1) setCurrentPage(currentPage + 1);
+              if (isRTL) {
+                if (currentPage > 0) {
+                  setCurrentPage(currentPage - 1);
+                }
+              } else {
+                if (currentPage < totalPages - 1) {
+                  setCurrentPage(currentPage + 1);
+                }
+              }
             }}
-            disabled={currentPage === totalPages - 1}
+            disabled={
+              isRTL ? currentPage === 0 : currentPage === totalPages - 1
+            }
             className={navBtnClass}
             style={{ background: "var(--button-gradient)" }}
-            title={isRTL ? "الصفحة التالية" : "Next page"}
-            aria-label={isRTL ? "الصفحة التالية" : "Next page"}
+            title={isRTL ? "الصفحة السابقة" : "Next page"}
+            aria-label={isRTL ? "الصفحة السابقة" : "Next page"}
           >
             ›
           </button>

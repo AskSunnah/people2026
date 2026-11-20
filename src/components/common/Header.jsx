@@ -1,10 +1,9 @@
 "use client";
 
 import { useLocale, useTranslations } from "next-intl";
-import { usePathname } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 
 const PAGE_TITLE_KEYS = {
-  "/": "common.site.name",
   "/about": "about.headerTitle",
   "/feedback": "feedback.headerTitle",
   "/terms": "terms.headerTitle",
@@ -12,47 +11,41 @@ const PAGE_TITLE_KEYS = {
   "/library": "library.headerTitle",
   "/books": "library.books.headerTitle",
 };
+
 export default function Header() {
   const pathname = usePathname();
   const t = useTranslations();
   const locale = useLocale();
   const isRTL = locale === "ar";
 
-  const titleKey = PAGE_TITLE_KEYS[pathname] ?? "common.site.name";
-  const title = t(titleKey);
-  const tagline = t("common.site.tagline");
+  const pageTitleKey = PAGE_TITLE_KEYS[pathname];
+  const subtitle = pageTitleKey ? t(pageTitleKey) : t("common.site.tagline");
 
   return (
-   <header
-  className={`
-    text-white
-    py-8 md:py-7
-    px-6 md:px-8
-    ${isRTL ? "font-arabic" : "font-['Segoe_UI',Tahoma,Geneva,Verdana,sans-serif]"}
-    bg-[linear-gradient(180deg,#e1cb57_0%,#d0b640_30%,#c3a421_65%,#a67f0f_110%)]
-    border-b border-black/10 shadow-sm
-  `}
->
-      <div className="md:grid md:grid-cols-3 md:items-center">
-        <div className="hidden md:block" />
+    <header
+      className={`
+        px-6 py-5 text-center text-white md:px-8 md:py-6
+        ${isRTL ? "font-arabic" : "font-['Segoe_UI',Tahoma,Geneva,Verdana,sans-serif]"}
+        [background-image:radial-gradient(ellipse_at_top,rgba(255,255,255,0.22),transparent_60%),linear-gradient(180deg,#d4b93f_0%,#c3a421_60%,#a67f0f_100%)]
+        border-b border-black/10 shadow-sm
+      `}
+    >
+      <Link
+        href="/"
+        className="inline-block text-white no-underline hover:text-white"
+      >
+        <span
+          className={`block text-[1.9rem] font-bold tracking-tight [text-shadow:0_1px_2px_rgba(0,0,0,0.25)] md:text-[2.2rem] ${
+            isRTL ? "leading-relaxed" : "leading-none"
+          }`}
+        >
+          {t("common.site.name")}
+        </span>
+      </Link>
 
-        <div className="text-center">
-         <div
-  className={`text-[2rem] md:text-[2.2rem] font-bold tracking-tight ${
-    isRTL ? "leading-relaxed" : "leading-none"
-  }`}
->
-  {title}
-</div>
-<div
-  className={`mt-2 text-base md:text-lg text-white/90 ${
-    isRTL ? "leading-relaxed" : ""
-  }`}
->
-  <p>{tagline}</p>
-</div>
-        </div>
-      </div>
+      <p className="mx-auto mt-2 max-w-xl text-balance text-sm text-white/95 [text-shadow:0_1px_2px_rgba(0,0,0,0.2)] md:text-base">
+        {subtitle}
+      </p>
     </header>
   );
 }

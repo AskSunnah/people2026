@@ -1,14 +1,29 @@
 {
   "headerTitle": "Library",
   "seo": {
-    "title": "Library",
-    "description": "Browse the Ask Sunnah Library with English and Arabic books on Aqeedah, Hadith, Fiqh, Seerah and other Islamic topics."
+    "title": "Islamic Library: Arabic & English Books | Ask Sunnah",
+    "description": "Browse and read Islamic books in Arabic and English on Aqeedah, Hadith, Fiqh and Seerah in the free Ask Sunnah Library."
   },
   "landing": {
     "welcome": "Welcome, seeker of knowledge.",
     "englishBooks": "English Books",
     "arabicBooks": "Arabic Books",
-    "hoverHint": "Hover to read"
+    "hoverHint": "Hover to read",
+    "intro": "Read Islamic books online for free, in Arabic and English, on Aqeedah, Hadith, Fiqh, Seerah and more.",
+    "recentlyAdded": "Recently added",
+    "viewAll": "View all",
+    "englishTitle": "English Books",
+    "arabicTitle": "Arabic Books",
+    "count": "{count} books",
+    "browseEnglish": "Browse all English books",
+    "browseArabic": "Browse all Arabic books",
+    "read": "Read",
+    "searchPlaceholder": "Search books, authors, topics...",
+    "search": "Search",
+    "englishLabel": "English books",
+    "arabicLabel": "Arabic books",
+    "viewAllEnglish": "View all English books",
+    "viewAllArabic": "View all Arabic books"  
   },
   "books": {
     "headerTitle": "English Books",
