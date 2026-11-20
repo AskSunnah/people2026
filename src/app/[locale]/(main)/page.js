@@ -40,7 +40,7 @@ export default async function HomePage({ params }) {
     answersResult.status === "fulfilled" && Array.isArray(answersResult.value)
       ? answersResult.value.slice().reverse()
       : [];
-
+  console.log("FIRST ANSWER:", answers[0]);
   const pinnedSections =
     pinned.status === "fulfilled" && pinned.value?.active
       ? pinned.value.sections || []
@@ -60,11 +60,11 @@ export default async function HomePage({ params }) {
     "@type": "WebPage",
     "@id": `${SITE_URL}/${locale}/#webpage`,
     url: `${SITE_URL}/${locale}`,
-    name: "Ask Sunnah",
+    name: "AskSunnah",
     description:
       locale === "ar"
         ? "اسأل وتصفح الإجابات الإسلامية في مكتبة أسك سنة."
-        : "Explore Islamic questions and answers on Ask Sunnah.",
+        : "Explore Islamic questions and answers on AskSunnah.",
     inLanguage: locale,
     isPartOf: { "@id": `${SITE_URL}/#website` },
     mainEntity: {
@@ -102,6 +102,15 @@ export default async function HomePage({ params }) {
     __html: JSON.stringify(data).replace(/</g, "\\u003c"),
   });
 
+  // One sticky recipe for both rails:
+  // - top-20 sits just under the navbar (no big gap, no overlap)
+  // - max-h + overflow lets short laptop screens scroll the rail itself
+  // - overscroll-contain stops the page from "chaining" scrolls into it
+  const rail =
+    "hidden lg:block lg:sticky lg:top-20 lg:self-start " +
+    "lg:max-h-[calc(100vh-6rem)] lg:overflow-y-auto lg:overscroll-contain " +
+    "[scrollbar-width:thin]";
+
   return (
     <>
       <script
@@ -115,35 +124,36 @@ export default async function HomePage({ params }) {
         />
       )}
 
-      {/* <1024: 1 column | 1024-1279: left rail + main | 1280+: left + main + right */}
+      {/*
+        <1024: 1 column | 1024-1279: left rail + main | 1280+: left + main + right.
+        Both rails use the same sticky recipe (see `rail` below).
+      */}
       <div
-        className="mx-auto my-8 grid max-w-[1280px] items-start gap-6 px-4
-          lg:grid-cols-[220px_minmax(0,1fr)]
-          xl:grid-cols-[230px_minmax(0,1fr)_260px]
+        className="mx-auto my-6 grid max-w-[1280px] items-start gap-6 px-4
+          lg:grid-cols-[230px_minmax(0,1fr)]
+          xl:grid-cols-[240px_minmax(0,1fr)_280px]
           max-md:my-0 max-md:px-0"
       >
-        {/* Left rail (from lg) */}
-        <aside className="sticky top-24 hidden max-h-[calc(100vh-7rem)] overflow-y-auto lg:block">
-          <CategorySidebar categories={categories} locale={locale} />
+        {/* Left rail */}
+        <aside className={rail}>
+          <CategorySidebar categories={categories} locale={locale} limit={12} />
         </aside>
 
-        {/* Main column: DOM order = Ask, topics, library, answers (good for SEO + mobile) */}
         <main
           className="
-            min-w-0 bg-[var(--bg-main)] px-6 py-6 text-[var(--text-main)]
-            rounded-[10px] shadow-[2px_3px_12px_rgba(0,0,0,0.14)]
+            min-w-0 rounded-[10px] bg-[var(--bg-main)] px-6 py-6 text-[var(--text-main)]
+            shadow-[2px_3px_12px_rgba(0,0,0,0.14)]
             [&>section]:mb-8
             [&_h2]:text-[var(--bg-color-header)] [&_h3]:text-[var(--bg-color-header)]
             max-md:rounded-none max-md:bg-white max-md:px-4 max-md:py-4 max-md:shadow-none
           "
         >
+          <AskQuestionSection direction={direction} locale={locale} />
+
           {pinnedSections.length > 0 && (
             <PinnedSection sections={pinnedSections} direction={direction} />
           )}
 
-          <AskQuestionSection direction={direction} locale={locale} />
-
-          {/* Chips show below lg; Library banner shows below xl (right rail holds it on xl+) */}
           <CategoryChips categories={categories} locale={locale} />
           <div className="mb-8 xl:hidden">
             <LibraryCard locale={locale} bookCount={bookCount} />
@@ -157,8 +167,8 @@ export default async function HomePage({ params }) {
         </main>
 
         {/* Right rail */}
-        <aside className="sticky top-24 hidden max-h-[calc(100vh-7rem)] overflow-y-auto xl:block">
-          <RightRail locale={locale} bookCount={bookCount} />
+        <aside className={`${rail} !hidden xl:!block`}>
+          <RightRail locale={locale} bookCount={bookCount} showAsk />
         </aside>
       </div>
     </>

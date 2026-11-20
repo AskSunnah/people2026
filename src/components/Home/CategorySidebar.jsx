@@ -24,7 +24,7 @@ function Branch({ items, locale, activePath, depth = 0 }) {
             <Link
               href={`/${locale}/categories/${cat.path}`}
               aria-current={exact ? "page" : undefined}
-              className={`flex items-center justify-between gap-2 rounded-lg px-2.5 py-2 text-sm transition-colors
+              className={`flex items-start justify-between gap-2 rounded-lg px-2.5 py-2 text-sm transition-colors
                 focus-visible:outline-2 focus-visible:outline-[#c8aa35]
                 ${
                   exact
@@ -32,7 +32,7 @@ function Branch({ items, locale, activePath, depth = 0 }) {
                     : "text-[var(--text-main)] hover:bg-[#fff6d8] hover:text-[#8a6d00]"
                 }`}
             >
-              <span className="truncate">{cat.name}</span>
+              <span className="line-clamp-2 leading-snug">{cat.name}</span>
               <span className="shrink-0 rounded-full bg-[#fbf3d3] px-2 py-0.5 text-xs text-[#8a6d00] tabular-nums">
                 {cat.questionCount || 0}
               </span>
@@ -55,7 +55,7 @@ function Branch({ items, locale, activePath, depth = 0 }) {
 export default function CategorySidebar({
   categories = [],
   locale,
-  limit = 9,
+  limit = 12,
   activePath,
 }) {
   const isArabic = locale === "ar";
