@@ -17,6 +17,39 @@
   "emailRequired": "Please enter your email before proceeding.",
   "genericError": "Something went wrong. Please try again.",
   "maintenance": "Under Maintenance, please come back",
+  "secureNote": "Payments are processed securely. Thank you for your support.",
+  "recurringNote": "A monthly gift keeps Ask Sunnah running steadily. You can cancel anytime.",
+  "ayah": {
+    "translation": "The example of those who spend their wealth in the way of Allah is like a grain that sprouts seven ears, each ear bearing a hundred grains. Allah multiplies for whom He wills, and Allah is All-Encompassing, All-Knowing.",
+    "reference": "Surah Al-Baqarah 2:261"
+  },
+  "impact": {
+    "heading": "Where your support goes",
+    "subheading": "Every contribution helps us keep authentic knowledge accessible to everyone.",
+    "items": {
+      "free": {
+        "title": "Free for everyone",
+        "text": "Keeping Ask Sunnah free and ad-free for students of knowledge around the world."
+      },
+      "sources": {
+        "title": "Authentic sources",
+        "text": "Expanding and verifying our collection of hadith and references."
+      },
+      "languages": {
+        "title": "More languages",
+        "text": "Translating and localizing so more people can benefit in their own language."
+      },
+      "tech": {
+        "title": "Better tools",
+        "text": "Hosting, search quality and new features that make learning easier."
+      }
+    }
+  },
+  "jariyah": {
+    "heading": "A gift that keeps giving",
+    "hadith": "When a person dies, their deeds come to an end except for three: ongoing charity, beneficial knowledge, or a righteous child who prays for them.",
+    "reference": "Sahih Muslim"
+  },
   "success": {
     "title": "Thank you!",
     "message": "Your donation has been successfully processed.",
@@ -32,5 +65,13 @@
     "button": "Go to Billing Portal",
     "loading": "Redirecting…",
     "error": "We couldn't load your subscription. Please try again from your confirmation email."
-  }
+  },
+  "hero": {
+      "title": "Plant a seed that keeps growing"
+    },
+    "give": {
+      "title": "Contribute",
+      "card": "Card",
+      "close": "Close"
+    }
 }

@@ -10,6 +10,7 @@ import { routing } from "@/i18n/routing";
 import { buildMetadata, SITE_URL } from "@/lib/seo";
 import "../globals.css";
 import { Noto_Sans_Arabic } from "next/font/google";
+import { Providers } from "../providers";
 
 const notoSansArabic = Noto_Sans_Arabic({
   subsets: ["arabic", "latin"],
@@ -84,7 +85,9 @@ const websiteSchema = {
     >
       <body className={`min-h-screen ${locale === "ar" ? "font-arabic" : ""}`}>
         <NextIntlClientProvider messages={messages}>
+          <Providers>
           <div className="flex min-h-screen flex-col">{children}</div>
+          </Providers>
         </NextIntlClientProvider>
         <script
           type="application/ld+json"
