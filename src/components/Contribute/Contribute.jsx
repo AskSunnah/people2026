@@ -98,7 +98,7 @@ function getAmount(customAmount, selectedAmount) {
 function Section({ className = "", children }) {
   return (
     <section
-      className={`py-9 sm:py-11 md:py-14 border-t border-[#eceef0] first:border-t-0 first:pt-0 ${className}`}
+      className={`py-8 sm:py-10 md:py-12 border-t border-[#eceef0] first:border-t-0 first:pt-0 ${className}`}
     >
       {children}
     </section>
@@ -166,16 +166,37 @@ export default function Contribute() {
     ? t("floatingText")
     : "Support open knowledge";
 
-  useEffect(() => {
-    const el = mobileCardRef.current;
-    if (!el || typeof IntersectionObserver === "undefined") return;
-    const io = new IntersectionObserver(
-      ([entry]) => setCardInView(entry.isIntersecting),
-      { threshold: 0.2 }
-    );
-    io.observe(el);
-    return () => io.disconnect();
-  }, []);
+useEffect(() => {
+  const el = mobileCardRef.current;
+  if (!el || typeof IntersectionObserver === "undefined") return;
+
+  const updateVisibility = () => {
+    if (window.innerWidth >= 1024) {
+      setCardInView(true);
+    }
+  };
+
+  updateVisibility();
+
+  const io = new IntersectionObserver(
+    ([entry]) => {
+      if (window.innerWidth >= 1024) {
+        setCardInView(true);
+        return;
+      }
+      setCardInView(entry.isIntersecting);
+    },
+    { threshold: 0.05 }
+  );
+
+  io.observe(el);
+  window.addEventListener("resize", updateVisibility);
+
+  return () => {
+    io.disconnect();
+    window.removeEventListener("resize", updateVisibility);
+  };
+}, []);
 
   const scrollToMobileForm = () => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -225,6 +246,38 @@ export default function Contribute() {
       setSubmitting(false);
     }
   };
+
+  const renderImpactSection = () => (
+    <Section>
+      <div className="mb-6 sm:mb-8">
+        <h2 className="text-[22px] sm:text-[24px] md:text-[30px] leading-tight font-bold text-[#1f2d3a] mb-2">
+          {t("impact.heading")}
+        </h2>
+        <p className="text-[14px] sm:text-[15px] md:text-[16px] leading-relaxed text-[#5b6670] max-w-[580px]">
+          {t("impact.subheading")}
+        </p>
+      </div>
+
+      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
+        {IMPACT_KEYS.map((key) => (
+          <li
+            key={key}
+            className="min-w-0 rounded-[18px] sm:rounded-[20px] border border-[#eceef0] bg-white p-5 sm:p-6"
+          >
+            <div className="w-11 h-11 mb-3.5 sm:mb-4 rounded-2xl flex items-center justify-center text-[var(--bg-color-header)] bg-[color-mix(in_srgb,var(--bg-color-header)_12%,white)]">
+              {ICONS[key]}
+            </div>
+            <h3 className="text-[16px] sm:text-[17px] font-bold text-[#1f2d3a] mb-1.5">
+              {t(`impact.items.${key}.title`)}
+            </h3>
+            <p className="text-[14px] leading-relaxed text-[#5b6670]">
+              {t(`impact.items.${key}.text`)}
+            </p>
+          </li>
+        ))}
+      </ul>
+    </Section>
+  );
 
   const renderCheckoutCard = (isMobile = false) => (
     <form
@@ -403,7 +456,7 @@ export default function Contribute() {
         {/* Left editorial column */}
         <main className="min-w-0">
           <Section>
-            <h1 className="text-[28px] sm:text-[34px] md:text-[46px] leading-[1.15] tracking-[-0.02em] font-bold text-[#1f2d3a] mb-3.5 sm:mb-4 break-words">
+            <h1 className="text-[28px] sm:text-[34px] md:text-[46px] leading-[1.15] tracking-[-0.02em] font-bold text-[var(--bg-color-header)] mb-3.5 sm:mb-4 break-words">
               {t("hero.title")}
             </h1>
             <p className="text-[15px] sm:text-[16px] md:text-[18px] leading-[1.7] text-[#5b6670] max-w-[620px]">
@@ -429,35 +482,12 @@ export default function Contribute() {
             />
           </Section>
 
-          <Section>
-            <div className="mb-6 sm:mb-8">
-              <h2 className="text-[22px] sm:text-[24px] md:text-[30px] leading-tight font-bold text-[#1f2d3a] mb-2">
-                {t("impact.heading")}
-              </h2>
-              <p className="text-[14px] sm:text-[15px] md:text-[16px] leading-relaxed text-[#5b6670] max-w-[580px]">
-                {t("impact.subheading")}
-              </p>
-            </div>
+          {/* Mobile/tablet: checkout form comes right after the Ayah and before "Where your support goes" */}
+          <div className="lg:hidden py-6 sm:py-8 border-t border-[#eceef0] min-w-0">
+            {renderCheckoutCard(true)}
+          </div>
 
-            <ul className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
-              {IMPACT_KEYS.map((key) => (
-                <li
-                  key={key}
-                  className="min-w-0 rounded-[18px] sm:rounded-[20px] border border-[#eceef0] bg-white p-5 sm:p-6"
-                >
-                  <div className="w-11 h-11 mb-3.5 sm:mb-4 rounded-2xl flex items-center justify-center text-[var(--bg-color-header)] bg-[color-mix(in_srgb,var(--bg-color-header)_12%,white)]">
-                    {ICONS[key]}
-                  </div>
-                  <h3 className="text-[16px] sm:text-[17px] font-bold text-[#1f2d3a] mb-1.5">
-                    {t(`impact.items.${key}.title`)}
-                  </h3>
-                  <p className="text-[14px] leading-relaxed text-[#5b6670]">
-                    {t(`impact.items.${key}.text`)}
-                  </p>
-                </li>
-              ))}
-            </ul>
-          </Section>
+          {renderImpactSection()}
 
           <Section>
             <Quote
@@ -466,11 +496,6 @@ export default function Contribute() {
               reference={t("jariyah.reference")}
             />
           </Section>
-
-          {/* Mobile-only checkout card */}
-          <div className="lg:hidden pt-2 sm:pt-4 min-w-0">
-            {renderCheckoutCard(true)}
-          </div>
         </main>
 
         {/* Right column: single sticky checkout card on desktop */}
